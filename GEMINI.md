@@ -1,356 +1,255 @@
-# KIA Nha Trang - Car Sales Website
+# KIA Nha Trang – Car Sales Website
 
-## 📋 Project Overview
-
-This is a car sales website project for KIA Nha Trang dealership, including:
-
-- **Frontend**: Modern, responsive user interface
-- **Backend**: RESTful API for managing cars, orders, customers
+> **Purpose of this document**: This README is written to be **explicit, structured, and unambiguous**, so that **AI agents (code assistants, autonomous planners, copilots)** can understand the project context, constraints, and expected implementation behavior without additional human clarification.
 
 ---
 
-## 🏗️ Project Architecture
+## 📋 Project Overview
+
+This project is a **car sales website for the KIA Nha Trang dealership**, implemented as a **single Next.js fullstack application** using the **App Router**.
+
+The website focuses on **vehicle showcasing and lead collection**, not e‑commerce checkout. All user actions ultimately generate **sales leads** (quote requests, test-drive registrations, contact inquiries).
+
+### High-level Goals
+
+* Present KIA car models in a **modern, premium, brand-consistent UI**
+* Optimize for **SEO**, **performance**, and **mobile-first UX**
+* Collect **high-quality leads** for dealership staff
+* Maintain a **simple, scalable fullstack architecture** suitable for small teams
+
+### Current Status
+
+* **Frontend**: MVP under active development
+* **Backend**: Not separated; handled via Next.js Server Components, Route Handlers, and (future) Server Actions
+* **Data**:
+
+  * Current: local **mock data** stored in `src/lib`
+  * Planned: **Prisma + SQLite** (local) → extensible to PostgreSQL
+
+### Non-goals (Explicit Constraints)
+
+* ❌ No online payments
+* ❌ No real-time chat system
+* ❌ No microservices architecture
+
+---
+
+## 🏗️ Architecture Overview
+
+This repository follows a **single-repo, fullstack Next.js architecture**.
+
+* One deployment unit
+* No separate backend service
+* Clear separation between:
+
+  * UI components
+  * Domain components
+  * Data access
+  * Server logic
+
+### Architectural Principles
+
+* **Server-first** (Server Components by default)
+* **Client Components only when required** (forms, animations, interactions)
+* **Colocation**: components live close to the routes that use them
+* **Predictable structure** so AI can infer responsibilities
+
+---
+
+## 📁 Repository Structure
 
 ```
 oto-kia-nha-trang/
-├── frontend/          # Next.js 16 + React 19 + TailwindCSS 4
-│   ├── src/
-│   │   └── app/       # App Router (Next.js)
-│   └── public/        # Static assets
+├── app/                      # Next.js App Router
+│   ├── (routes)/             # Public website routes
+│   │   ├── page.tsx          # Home page
+│   │   ├── xe/               # Car listing
+│   │   ├── bao-gia/           # Quote request
+│   │   ├── lai-thu/           # Test drive
+│   │   ├── lien-he/           # Contact
+│   │   └── gioi-thieu/        # About
+│   │
+│   ├── api/                  # Route Handlers (future backend)
+│   ├── globals.css           # Global styles & Tailwind layers
+│   └── layout.tsx            # Root layout (HTML shell)
+│   └── page.tsx              # Root page (HTML shell)
+│   └── not-found.tsx         # 404 page
+│   └── redirect.tsx          # Redirect page
+│   └── loading.tsx           # Loading page
+│   └── error.tsx             # Error page
 │
-└── backend/           # NestJS 11 + TypeScript
-    ├── src/
-    │   ├── modules/   # Feature modules
-    │   ├── common/    # Shared utilities
-    │   └── config/    # Configuration
-    └── test/          # E2E tests
+├── components/               # React components
+│   ├── cars/                 # Car domain components
+│   ├── forms/                # Lead capture forms
+│   ├── home/                 # Homepage sections
+│   ├── layout/               # Header / Footer / Navigation
+│   └── ui/                   # Design system primitives
+│
+├── lib/                      # Utilities & domain logic
+│   ├── data/                 # Data access
+│   ├── constants/            # Constants & enums
+│   └── utils/                # Utilities
+│
+├── prisma/                   # Prisma schema & migrations (planned)
+├── public/                   # Static assets (images, icons)
+├── package.json
+└── README.md
 ```
+
+> **AI rule**: Do not introduce new top-level folders without strong justification.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
+### Core Technologies
 
-| Technology  | Version | Purpose         |
-| ----------- | ------- | --------------- |
-| Next.js     | 16.1.1  | React Framework |
-| React       | 19.2.3  | UI Library      |
-| TailwindCSS | 4.x     | Styling         |
-| TypeScript  | 5.x     | Type Safety     |
+| Technology  | Version | Responsibility                           |
+| ----------- | ------- | ---------------------------------------- |
+| Next.js     | 16.x    | Fullstack framework (SSR, routing, APIs) |
+| TypeScript  | 5.x     | Type safety & contracts                  |
+| TailwindCSS | 4.x     | Styling system                           |
 
-### Backend
+### Supporting Libraries
 
-| Technology | Version | Purpose           |
-| ---------- | ------- | ----------------- |
-| NestJS     | 11.x    | Backend Framework |
-| TypeScript | 5.7.3   | Type Safety       |
-| Jest       | 30.x    | Testing           |
-
-### Database (To be installed)
-
-- **PostgreSQL** or **MongoDB** (PostgreSQL recommended)
-- **Prisma** or **TypeORM** as ORM
+* **Framer Motion** – animations & page transitions
+* **Lucide / Heroicons** – iconography
+* **clsx + tailwind-merge** – conditional class handling
 
 ---
 
-## 📁 Backend Module Structure
+## 🧭 Routing Specification
 
-### Modules to develop:
+All public routes live under `src/app/(routes)`.
 
-```
-src/
-├── modules/
-│   ├── cars/              # Car management
-│   │   ├── dto/
-│   │   ├── entities/
-│   │   ├── cars.controller.ts
-│   │   ├── cars.service.ts
-│   │   └── cars.module.ts
-│   │
-│   ├── categories/        # Car categories (SUV, Sedan, MPV...)
-│   ├── orders/            # Orders / Consultation requests
-│   ├── customers/         # Customers
-│   ├── testimonials/      # Customer reviews
-│   ├── gallery/           # Photo/Video gallery
-│   ├── contacts/          # Contact
-│   └── auth/              # Authentication (Admin)
-│
-├── common/
-│   ├── decorators/
-│   ├── filters/
-│   ├── guards/
-│   ├── interceptors/
-│   └── pipes/
-│
-└── config/
-    ├── database.config.ts
-    └── app.config.ts
-```
+| Route         | Purpose       | Notes                                |
+| ------------- | ------------- | ------------------------------------ |
+| `/`           | Homepage      | Brand introduction & featured models |
+| `/xe`         | Car listing   | Filterable model list                |
+| `/xe/[slug]`  | Car detail    | SEO-optimized dynamic page           |
+| `/bao-gia`    | Quote request | Lead capture                         |
+| `/lai-thu`    | Test drive    | Lead capture                         |
+| `/lien-he`    | Contact       | General inquiry                      |
+| `/gioi-thieu` | About         | Dealership info                      |
+
+> **AI rule**: Car detail pages must be statically optimizable (SSG-compatible).
 
 ---
 
-## 📁 Frontend Structure
+## 🧩 Component Responsibilities
 
-### Pages to develop:
+### `components/cars/`
 
-```
-src/app/
-├── page.tsx                    # Homepage
-├── layout.tsx                  # Root layout
-├── globals.css                 # Global styles
-│
-├── (routes)/
-│   ├── xe/                     # Car list
-│   │   ├── page.tsx
-│   │   └── [slug]/             # Car details
-│   │       └── page.tsx
-│   │
-│   ├── gioi-thieu/             # About us
-│   │   └── page.tsx
-│   │
-│   ├── lien-he/                # Contact
-│   │   └── page.tsx
-│   │
-│   ├── bao-gia/                # Quote request
-│   │   └── page.tsx
-│   │
-│   └── lai-thu/                # Test drive registration
-│       └── page.tsx
-│
-└── components/
-    ├── layout/
-    │   ├── Header.tsx
-    │   ├── Footer.tsx
-    │   ├── Navbar.tsx
-    │   └── Sidebar.tsx
-    │
-    ├── home/
-    │   ├── HeroBanner.tsx
-    │   ├── FeaturedCars.tsx
-    │   ├── Promotions.tsx
-    │   └── Testimonials.tsx
-    │
-    ├── cars/
-    │   ├── CarCard.tsx
-    │   ├── CarList.tsx
-    │   ├── CarDetail.tsx
-    │   ├── CarGallery.tsx
-    │   └── CarSpecs.tsx
-    │
-    ├── forms/
-    │   ├── ContactForm.tsx
-    │   ├── QuoteForm.tsx
-    │   └── TestDriveForm.tsx
-    │
-    └── ui/
-        ├── Button.tsx
-        ├── Modal.tsx
-        ├── Carousel.tsx
-        └── Card.tsx
-```
+* `CarCard`: summary card (image, name, price range)
+* `CarList`: grid/list layout
+* `CarGallery`: image slider
+* `CarSpecs`: technical specifications table
+
+### `components/forms/`
+
+* QuoteForm
+* TestDriveForm
+* ContactForm
+
+> All forms:
+>
+> * Validate input
+> * Be client components
+> * Submit to server actions or API routes
+
+### `components/ui/`
+
+Reusable primitives:
+
+* Button
+* Card
+* Modal
+* Carousel
+* Input / Select
+
+> **AI rule**: UI components must be stateless and reusable.
 
 ---
 
-## 🗃️ Database Schema
+## 🎨 Design System
 
-### Cars
-
-```typescript
-interface Car {
-  id: string;
-  name: string; // Car name: "KIA Seltos"
-  slug: string; // URL slug: "kia-seltos"
-  category: Category; // Category: SUV, Sedan...
-  price: number; // Listed price
-  promotionPrice?: number; // Promotional price
-  description: string; // Description
-  specifications: CarSpec; // Technical specifications
-  images: string[]; // Images
-  colors: CarColor[]; // Colors
-  isNew: boolean; // New car
-  isFeatured: boolean; // Featured car
-  status: "available" | "coming_soon" | "discontinued";
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-
-### CarSpec (Technical Specifications)
-
-```typescript
-interface CarSpec {
-  engine: string; // Engine: "1.6L Turbo"
-  power: string; // Power: "177 HP"
-  torque: string; // Torque: "265 Nm"
-  transmission: string; // Transmission: "7-speed DCT"
-  fuelType: string; // Fuel: "Gasoline"
-  fuelConsumption: string; // Consumption: "7.0L/100km"
-  seats: number; // Number of seats
-  dimensions: {
-    length: number;
-    width: number;
-    height: number;
-    wheelbase: number;
-  };
-  features: string[]; // Key features
-}
-```
-
-### Order
-
-```typescript
-interface Order {
-  id: string;
-  type: "quote" | "test_drive" | "purchase";
-  customer: Customer;
-  car: Car;
-  color?: string;
-  message?: string;
-  status: "pending" | "contacted" | "completed" | "cancelled";
-  preferredDate?: Date; // Preferred date (test drive)
-  createdAt: Date;
-}
-```
-
-### Customer
-
-```typescript
-interface Customer {
-  id: string;
-  fullName: string;
-  phone: string;
-  email?: string;
-  address?: string;
-  createdAt: Date;
-}
-```
-
----
-
-## 🎨 Design Guidelines
-
-### KIA Brand Colors
+### Brand Colors (CSS Variables)
 
 ```css
 :root {
-  --kia-red: #bb162b; /* Primary KIA Red */
-  --kia-dark: #1a1a1a; /* Black */
-  --kia-gray: #4a4a4a; /* Gray */
-  --kia-light: #f5f5f5; /* Light Gray */
-  --kia-white: #ffffff; /* White */
-  --accent-gold: #c9a85c; /* Luxury Gold */
+  --kia-red: #bb162b;
+  --kia-dark: #1a1a1a;
+  --kia-gray: #4a4a4a;
+  --kia-light: #f5f5f5;
+  --kia-white: #ffffff;
+  --accent-gold: #c9a85c;
 }
 ```
 
-### Design Requirements
+### Design Principles
 
-1. **Modern & Premium**: Elegant, modern design
-2. **Mobile-first**: Prioritize mobile responsiveness
-3. **Fast Loading**: Optimize images, lazy loading
-4. **SEO Friendly**: Meta tags, structured data
-5. **Accessibility**: WCAG 2.1 AA compliance
+* Premium & minimal
+* Strong typography hierarchy
+* Clear CTAs
+* High contrast & accessibility aware
 
-### Fonts
+### Typography
 
-- **Heading**: Kia Signature (or Montserrat)
-- **Body**: Inter or Open Sans
+* Headings: **Montserrat**
+* Body: **Inter**
 
 ---
 
-## 🚀 Development Guide
+## 🚀 Development Workflow
 
 ### Scripts
 
 ```bash
-# Frontend
-cd frontend
-npm run dev          # Run development server (port 3000)
-npm run build        # Build production
-npm run lint         # Check for errors
-
-# Backend
-cd backend
-npm run start:dev    # Run development server (port 3001)
-npm run build        # Build production
-npm run test         # Run unit tests
-npm run test:e2e     # Run e2e tests
+npm run dev      # Start dev server
+npm run build    # Production build
+npm run lint     # Lint + type check
 ```
 
-### Environment Variables
+### Coding Rules (AI-Enforced)
 
-#### Frontend (.env.local)
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-#### Backend (.env)
-
-```env
-PORT=3001
-DATABASE_URL=postgresql://user:user@13402004@localhost:5432/oto_kia_nha_trang
-JWT_SECRET=your-secret-key
-```
+* Prefer Server Components
+* Avoid `use client` unless required
+* Strong typing for props & data
+* No inline magic values (use constants)
 
 ---
 
-## 📌 Features to Develop
+## 📌 Feature Roadmap
 
-### MVP
+### MVP (Current Phase)
 
-- [ ] Homepage with banner, featured cars
-- [ ] Car list by category
-- [ ] Car details with gallery, specifications
-- [ ] Quote / Contact form
-- [ ] Test drive registration form
-- [ ] About us, Contact pages
-- [ ] Chat widget (Zalo, Facebook)
-- [ ] Admin dashboard
+* Responsive layout
+* Homepage sections
+* Car listing (mock data)
+* Car detail pages
+* Quote / Test Drive / Contact forms
+* About page
 
----
+### Planned
 
-## 📞 API Endpoints
-
-### Cars
-
-```
-GET    /api/cars                 # Car list
-GET    /api/cars/:slug           # Car details
-GET    /api/cars/featured        # Featured cars
-GET    /api/cars/category/:id    # Cars by category
-```
-
-### Categories
-
-```
-GET    /api/categories           # Category list
-```
-
-### Orders
-
-```
-POST   /api/orders/quote         # Submit quote request
-POST   /api/orders/test-drive    # Register test drive
-POST   /api/orders/contact       # Submit contact
-```
+* Prisma + SQLite
+* Server Actions
+* Basic admin dashboard
+* Deployment on Vercel
 
 ---
 
-## ⚠️ Important Notes
+## 🤖 AI Collaboration Notes
 
-1. **Do not commit** `.env` files to git
-2. **Optimize images** before upload (WebP format)
-3. **Validate** all user inputs
-4. **Rate limiting** for form submissions
-5. **Backup database** regularly
+This project is designed to be:
 
----
+* Easy to reason about
+* Safe for autonomous refactoring
+* Predictable in structure
 
-## 📚 References
+**AI agents should**:
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [NestJS Documentation](https://docs.nestjs.com)
-- [TailwindCSS Documentation](https://tailwindcss.com/docs)
-- [Prisma Documentation](https://www.prisma.io/docs)
+* Follow existing folder conventions
+* Reuse UI primitives
+* Preserve SEO semantics
+* Avoid over-engineering

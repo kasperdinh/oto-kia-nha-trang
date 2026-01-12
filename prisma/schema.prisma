@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Car {
+  id             String    @id @default(uuid())
+  slug           String    @unique
+  name           String
+  price          Float
+  promotionPrice Float?
+  description    String
+  category       String?
+  seats          Int?
+  engine         String?
+  // Store main list image separately or pick the first from images relation
+  imageUrl       String?
+
+  images         CarImage[]
+  specs          CarSpec?
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model CarImage {
+  id        String   @id @default(uuid())
+  url       String
+  carId     String
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model CarSpec {
+  id              String @id @default(uuid())
+  carId           String @unique
+  car             Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+  engine          String?
+  power           String?
+  torque          String?
+  transmission    String?
+  fuelType        String?
+  fuelConsumption String?
+  seats           Int?
+
+  // Dimensions
+  length          Int?
+  width           Int?
+  height          Int?
+  wheelbase       Int?
+
+  // Stored as JSON string
+  features        String
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  type      String   // "QUOTE", "TEST_DRIVE", "CONTACT"
+  name      String
+  phone     String
+  email     String?
+  message   String?
+
+  // Context
+  carModel  String?
+  date      String?
+  location  String?
+  installment String? // "yes" or "no"
+
+  status    String   @default("PENDING") // PENDING, PROCESSED, ARCHIVED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
