@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/Button";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const CAR_MODELS = [
   "KIA Morning",
@@ -70,7 +71,7 @@ export function QuoteForm() {
             name="name"
             id="name"
             required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
             value={formData.name}
             onChange={handleChange}
           />
@@ -90,7 +91,7 @@ export function QuoteForm() {
             name="phone"
             id="phone"
             required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
             value={formData.phone}
             onChange={handleChange}
           />
@@ -104,12 +105,12 @@ export function QuoteForm() {
         >
           Dòng xe quan tâm *
         </label>
-        <div className="mt-2">
+        <div className="relative mt-2">
           <select
             id="carModel"
             name="carModel"
             required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
+            className="block w-full appearance-none rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
             value={formData.carModel}
             onChange={handleChange}
           >
@@ -120,6 +121,9 @@ export function QuoteForm() {
               </option>
             ))}
           </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+            <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
@@ -180,7 +184,7 @@ export function QuoteForm() {
             type="text"
             name="location"
             id="location"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
             value={formData.location}
             onChange={handleChange}
           />

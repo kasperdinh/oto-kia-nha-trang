@@ -22,16 +22,9 @@ const navigation = {
   support: [
     { name: "Đăng ký lái thử", href: "/lai-thu" },
     { name: "Yêu cầu báo giá", href: "/bao-gia" },
-    { name: "Thủ tục trả góp", href: "/tra-gop" },
-    { name: "Bảo hành & bảo dưỡng", href: "/dich-vu" },
     { name: "Liên hệ", href: "/lien-he" },
   ],
-  company: [
-    { name: "Về chúng tôi", href: "/gioi-thieu" },
-    { name: "Tuyển dụng", href: "/tuyen-dung" },
-    { name: "Tin tức & Sự kiện", href: "/tin-tuc" },
-    { name: "Chính sách bảo mật", href: "/chinh-sach-bao-mat" },
-  ],
+  company: [{ name: "Về chúng tôi", href: "/gioi-thieu" }],
 };
 
 export function Footer() {
@@ -64,11 +57,11 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <PhoneIcon className="h-5 w-5 shrink-0 text-kia-red" />
-                <span className="text-sm">Hotline: 0905.123.456</span>
+                <span className="text-sm">Hotline: 0123.123.123</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <EnvelopeIcon className="h-5 w-5 shrink-0 text-kia-red" />
-                <span className="text-sm">info@kianhatrang.vn</span>
+                <span className="text-sm">test@mail.com</span>
               </div>
             </div>
           </div>
@@ -158,7 +151,7 @@ export function Footer() {
         <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-gray-400">
             &copy; {new Date().getFullYear()} KIA Nha Trang. All rights
-            reserved. Designed by KasperDinh.
+            reserved. Designed by kasperdinh.
           </p>
         </div>
       </div>

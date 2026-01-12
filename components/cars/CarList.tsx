@@ -4,21 +4,11 @@ import { useState } from "react";
 import { CarCard } from "./CarCard";
 import { Button } from "../ui/Button";
 
-// Extended Car Interface for List
-interface CarSummary {
-  id: string;
-  name: string;
-  slug: string;
-  imageUrl: string;
-  price: number;
-  category: string;
-  seats: number;
-  engine: string;
-}
+import { CarData } from "@/lib/data/cars";
 
 const CATEGORIES = ["Tất cả", "Sedan", "SUV", "MPV", "Hatchback"];
 
-export function CarList({ cars }: { cars: CarSummary[] }) {
+export function CarList({ cars }: { cars: CarData[] }) {
   const [activeCategory, setActiveCategory] = useState("Tất cả");
 
   const filteredCars =

@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { Lead } from "@prisma/client";
+import { LeadData } from "@/lib/data/leads";
 
 export default async function AdminLeadsPage() {
   const leads = await prisma.lead.findMany({
@@ -59,7 +59,7 @@ export default async function AdminLeadsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {leads.map((lead: Lead) => (
+                  {leads.map((lead: LeadData) => (
                     <tr key={lead.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {lead.name}
@@ -94,7 +94,9 @@ export default async function AdminLeadsPage() {
                         {lead.message && <div>{lead.message}</div>}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {new Date(lead.createdAt).toLocaleDateString("vi-VN")}
+                        {lead.createdAt
+                          ? new Date(lead.createdAt).toLocaleDateString("vi-VN")
+                          : ""}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {lead.status === "PENDING" ? "Chưa xử lý" : "Đã xử lý"}

@@ -50,7 +50,7 @@ export function Header() {
               })}
             >
               <PhoneIcon className="h-4 w-4" />
-              <span>Hotline: 0905.123.456</span>
+              <span>Hotline: 0123.123.123</span>
             </Link>
             <Link
               href="/lai-thu"

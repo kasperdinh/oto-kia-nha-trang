@@ -52,8 +52,8 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-semibold text-gray-900">Hotline</h4>
                   <p className="text-gray-600 text-sm mt-1">
-                    <span className="block">Kinh doanh: 0905.123.456</span>
-                    <span className="block">Dịch vụ: 0905.654.321</span>
+                    <span className="block">Kinh doanh: 0123.123.123</span>
+                    <span className="block">Dịch vụ: 0123.123.123</span>
                   </p>
                 </div>
               </div>
@@ -63,9 +63,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email</h4>
-                  <p className="text-gray-600 text-sm mt-1">
-                    info@kianhatrang.vn
-                  </p>
+                  <p className="text-gray-600 text-sm mt-1">test@mail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">

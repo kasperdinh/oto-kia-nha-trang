@@ -57,7 +57,7 @@ export function Sidebar({ isOpen, onClose, navigation }: SidebarProps) {
                 className={cn(
                   "px-4 py-3 rounded-md text-base font-medium transition-colors",
                   isActive
-                    ? "bg-kia-red/10 text-kia-red"
+                    ? "bg-[rgba(187,22,43,0.1)] text-kia-red"
                     : "text-gray-700 hover:bg-gray-100"
                 )}
                 onClick={onClose}

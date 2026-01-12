@@ -1,7 +1,7 @@
 "use client";
 
 import { CarGallery } from "./CarGallery";
-import { CarSpecs, CarSpec } from "./CarSpecs";
+import { CarSpecs } from "./CarSpecs";
 import { buttonVariants } from "../ui/Button";
 import Link from "next/link";
 import {
@@ -10,18 +10,9 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
 
-// Extended Car Interface
-interface CarDetail {
-  id: string;
-  name: string;
-  price: number;
-  promotionPrice?: number;
-  description: string;
-  images: string[];
-  specs: CarSpec;
-}
+import { CarData } from "@/lib/data/cars";
 
-export function CarDetail({ car }: { car: CarDetail }) {
+export function CarDetail({ car }: { car: CarData }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-12">
       {/* Left Column: Gallery & Description - Spans 2 cols */}
@@ -42,7 +33,7 @@ export function CarDetail({ car }: { car: CarDetail }) {
           </div>
         </div>
 
-        <CarSpecs specs={car.specs} />
+        {car.specs && <CarSpecs specs={car.specs} />}
       </div>
 
       {/* Right Column: Pricing & CTAs - Spans 1 col */}
@@ -117,7 +108,7 @@ export function CarDetail({ car }: { car: CarDetail }) {
                     href="tel:0905123456"
                     className="text-lg font-bold text-kia-red hover:underline"
                   >
-                    0905.123.456
+                    0123.123.123
                   </a>
                 </div>
               </div>

@@ -1,19 +1,4 @@
-export interface CarSpec {
-  engine: string;
-  power: string;
-  torque: string;
-  transmission: string;
-  fuelType: string;
-  fuelConsumption: string;
-  seats: number;
-  dimensions: {
-    length: number;
-    width: number;
-    height: number;
-    wheelbase: number;
-  };
-  features: string[];
-}
+import { CarSpec } from "@/lib/data/cars";
 
 export function CarSpecs({ specs }: { specs: CarSpec }) {
   return (

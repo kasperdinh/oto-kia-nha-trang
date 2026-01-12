@@ -3,57 +3,14 @@
 import { CarCard } from "../cars/CarCard";
 import { buttonVariants } from "../ui/Button";
 import Link from "next/link";
-import { ChevronRightIcon } from "@heroicons/react/24/outline"; // Fixed import
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { CarData } from "@/lib/data/cars";
 
-// Mock data
-const FEATURED_CARS = [
-  {
-    id: "1",
-    name: "KIA Seltos",
-    slug: "kia-seltos",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
-    price: 604000000,
-    category: "SUV",
-    seats: 5,
-    engine: "1.4L Turbo",
-  },
-  {
-    id: "2",
-    name: "KIA Sonet",
-    slug: "kia-sonet",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
-    price: 519000000,
-    category: "SUV",
-    seats: 5,
-    engine: "1.5L Smartstream",
-  },
-  {
-    id: "3",
-    name: "KIA Carnival",
-    slug: "kia-carnival",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
-    price: 1189000000,
-    category: "MPV",
-    seats: 7,
-    engine: "2.2L Diesel",
-  },
-  {
-    id: "4",
-    name: "KIA K3",
-    slug: "kia-k3",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
-    price: 549000000,
-    category: "Sedan",
-    seats: 5,
-    engine: "1.6L Gamma",
-  },
-];
+interface FeaturedCarsProps {
+  cars: CarData[];
+}
 
-export function FeaturedCars() {
+export function FeaturedCars({ cars = [] }: FeaturedCarsProps) {
   return (
     <section className="py-24 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -75,7 +32,7 @@ export function FeaturedCars() {
         </div>
 
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {FEATURED_CARS.map((car) => (
+          {cars.map((car) => (
             <CarCard key={car.id} car={car} />
           ))}
         </div>
