@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import {
-  MapPinIcon,
-  PhoneIcon,
-  EnvelopeIcon,
-} from "@heroicons/react/24/outline";
+import { MapPinIcon, EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+import { FacebookIcon, ZaloIcon } from "../icons/Icons";
 
 const navigation = {
   products: [
@@ -37,10 +35,12 @@ export function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <div className="flex items-center space-x-2">
-              <span className="text-3xl font-black tracking-tighter text-kia-red">
-                KIA
-              </span>
-              <span className="text-xl font-bold text-white">NHA TRANG</span>
+              <Image
+                src="/logo-footer.png"
+                alt="Logo"
+                width={100}
+                height={100}
+              />
             </div>
             <p className="text-sm leading-6 text-gray-300">
               Đại lý ủy quyền chính thức của KIA Motors Việt Nam tại Nha Trang.
@@ -126,22 +126,22 @@ export function Footer() {
                 <h3 className="text-sm font-semibold leading-6 text-white uppercase tracking-wider">
                   Kết nối
                 </h3>
-                <div className="mt-6 flex space-x-6">
-                  {/* Placeholder social icons */}
+                <div className="mt-6 flex space-x-5">
+                  {/* Placeholder social icons Hotline, Facebook, Zalo */}
+                  <a
+                    href="tel:0905123456"
+                    className="text-gray-400 hover:text-gray-300"
+                  >
+                    <span className="sr-only">Hotline</span>
+                    <PhoneIcon className="h-6 w-6" aria-hidden="true" />
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-gray-300">
+                    <span className="sr-only">Zalo</span>
+                    <ZaloIcon className="h-6 w-6" aria-hidden="true" />
+                  </a>
                   <a href="#" className="text-gray-400 hover:text-gray-300">
                     <span className="sr-only">Facebook</span>
-                    <svg
-                      className="h-6 w-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <FacebookIcon className="h-7.5 w-7.5 -mt-0.5" aria-hidden="true" />
                   </a>
                 </div>
               </div>

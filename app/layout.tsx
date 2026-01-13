@@ -17,6 +17,8 @@ const inter = Inter({
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 
+import { ContactWidget } from "../components/layout/ContactWidget";
+
 export const metadata: Metadata = {
   title: "KIA Nha Trang - Đại lý chính hãng",
   description: "Mua bán xe ô tô KIA chính hãng tại Nha Trang",
@@ -35,6 +37,7 @@ export default function RootLayout({
         <Header />
         <main className="grow">{children}</main>
         <Footer />
+        <ContactWidget />
       </body>
     </html>
   );

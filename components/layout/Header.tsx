@@ -6,6 +6,7 @@ import { Bars3Icon, PhoneIcon } from "@heroicons/react/24/outline";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { buttonVariants } from "../ui/Button";
+import Image from "next/image";
 
 const navigation = [
   { name: "Trang chủ", href: "/" },
@@ -27,12 +28,12 @@ export function Header() {
             <Link href="/" className="-m-1.5 p-1.5 flex items-center space-x-2">
               <span className="sr-only">KIA Nha Trang</span>
               {/* Replace with actual Logo Image later */}
-              <span className="text-2xl font-black tracking-tighter text-kia-red">
-                KIA
-              </span>
-              <span className="text-lg font-bold text-kia-dark hidden sm:block">
-                NHA TRANG
-              </span>
+              <Image
+                src="/logo-header.png"
+                alt="Logo"
+                width={100}
+                height={100}
+              />
             </Link>
           </div>
 
