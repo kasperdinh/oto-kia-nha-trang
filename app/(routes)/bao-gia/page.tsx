@@ -1,10 +1,14 @@
 import { Metadata } from "next";
 import { QuoteForm } from "@/components/forms/QuoteForm";
+import { getBaseUrl } from "@/lib/url-helper";
 
 export const metadata: Metadata = {
-  title: "Yêu Cầu Báo Giá | KIA Khánh Hòa",
+  title: "Yêu Cầu Báo Giá Xe KIA Nha Trang Lăn Bánh",
   description:
-    "Nhận báo giá xe KIA lăn bánh mới nhất tại Khánh Hòa. Ưu đãi hấp dẫn, hỗ trợ trả góp lãi suất thấp.",
+    "Nhận báo giá chi tiết, khuyến mãi và lịch trả góp xe KIA mới nhất tại Nha Trang, Khánh Hòa. Hỗ trợ tư vấn tài chính miễn phí.",
+  alternates: {
+    canonical: `${getBaseUrl()}/bao-gia`,
+  },
 };
 
 export default function QuotePage() {
@@ -16,12 +20,11 @@ export default function QuotePage() {
           <div className="space-y-8">
             <div>
               <h1 className="text-3xl font-bold text-kia-dark sm:text-4xl mb-4">
-                Yêu Cầu Báo Giá
+                Yêu Cầu Báo Giá Xe KIA
               </h1>
               <p className="text-lg text-gray-600">
-                Hãy để lại thông tin, chúng tôi gửi đến
-                bạn bảng báo giá chi tiết và các chương trình khuyến mãi mới
-                nhất.
+                Hãy để lại thông tin, chúng tôi gửi đến bạn bảng báo giá chi
+                tiết và các chương trình khuyến mãi mới nhất.
               </p>
             </div>
 

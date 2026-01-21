@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { getBaseUrl } from "@/lib/url-helper";
 import {
   MapPinIcon,
   PhoneIcon,
@@ -8,9 +9,17 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const metadata: Metadata = {
-  title: "Liên Hệ | KIA Khánh Hòa",
+  title: "Liên Hệ KIA Nha Trang | Hotline, Địa Chỉ, Giờ Làm Việc",
   description:
-    "Liên hệ với KIA Khánh Hòa để được tư vấn về xe, báo giá, lái thử và dịch vụ bảo dưỡng.",
+    "Liên hệ Showroom KIA Nha Trang. Hotline kinh doanh: 0933.806.910. Địa chỉ: Lô số 1, Khu vực 2, Đường 23/10, Vĩnh Hiệp, Nha Trang, Khánh Hòa.",
+  alternates: {
+    canonical: `${getBaseUrl()}/lien-he`,
+  },
+  openGraph: {
+    title: "Liên Hệ Showroom KIA Nha Trang - Khánh Hòa",
+    description:
+      "Thông tin liên hệ, bản đồ chỉ đường và hotline tư vấn xe KIA tại Nha Trang.",
+  },
 };
 
 export default function ContactPage() {
@@ -18,7 +27,7 @@ export default function ContactPage() {
     <div className="bg-white">
       <div className="bg-gray-900 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-4xl font-bold mb-4">Liên Hệ Với Chúng Tôi</h1>
+          <h1 className="text-4xl font-bold mb-4">Liên Hệ KIA Khánh Hòa</h1>
           <p className="text-xl text-gray-300">
             Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn
           </p>
@@ -86,7 +95,8 @@ export default function ContactPage() {
               Yêu cầu tư vấn
             </h3>
             <p className="text-gray-500 mb-8">
-              Điền thông tin vào biểu mẫu dưới đây nếu bạn cần tư vấn thêm, chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+              Điền thông tin vào biểu mẫu dưới đây nếu bạn cần tư vấn thêm,
+              chúng tôi sẽ phản hồi trong thời gian sớm nhất.
             </p>
             <ContactForm />
           </div>

@@ -130,7 +130,7 @@ export function Footer() {
                     <span className="sr-only">Zalo</span>
                     <ZaloIcon className="h-6 w-6" aria-hidden="true" />
                   </a>
-                  <a href="https://www.facebook.com/profile.php?id=100080721695575" className="text-gray-400 hover:text-gray-300">
+                  <a href="https://www.facebook.com/kiakhanhhoa" className="text-gray-400 hover:text-gray-300">
                     <span className="sr-only">Facebook</span>
                     <FacebookIcon
                       className="h-7.5 w-7.5 -mt-0.5"
@@ -159,7 +159,7 @@ export function Footer() {
               <p>
                 Thiết kế và phát triển bởi{" "}
                 <a
-                  href="https://kasperdinh.com"
+                  href="https://www.linkedin.com/in/kasperdinh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-gray-300 hover:text-white"

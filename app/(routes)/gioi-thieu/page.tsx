@@ -1,10 +1,19 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import { getBaseUrl } from "@/lib/url-helper";
 
 export const metadata: Metadata = {
-  title: "Giới Thiệu | KIA Khánh Hòa",
+  title: "Giới Thiệu Showroom KIA Nha Trang - Khánh Hòa",
   description:
-    "Website KIA Khánh Hòa cung cấp thông tin chi tiết, cập nhật và chính xác về các dòng xe KIA tại Việt Nam.",
+    "KIA Nha Trang - Showroom tiểu chuẩn 3S tại Khánh Hòa. Cam kết mang đến trải nghiệm mua sắm và dịch vụ bảo dưỡng xe KIA tốt nhất.",
+  alternates: {
+    canonical: `${getBaseUrl()}/gioi-thieu`,
+  },
+  openGraph: {
+    title: "Về KIA Nha Trang - Showroom Chính Hãng Tại Khánh Hòa",
+    description: "Đại lý ủy quyền chính thức của KIA Motors tại Khánh Hòa.",
+    images: ["/introduce-banner.webp"],
+  },
 };
 
 export default function AboutPage() {
