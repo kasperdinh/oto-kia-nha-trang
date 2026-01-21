@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export const metadata: Metadata = {
-  title: "Yêu Cầu Báo Giá | KIA Nha Trang",
+  title: "Yêu Cầu Báo Giá | KIA Khánh Hòa",
   description:
-    "Nhận báo giá xe KIA lăn bánh mới nhất tại Nha Trang. Ưu đãi hấp dẫn, hỗ trợ trả góp lãi suất thấp.",
+    "Nhận báo giá xe KIA lăn bánh mới nhất tại Khánh Hòa. Ưu đãi hấp dẫn, hỗ trợ trả góp lãi suất thấp.",
 };
 
 export default function QuotePage() {
@@ -19,7 +19,7 @@ export default function QuotePage() {
                 Yêu Cầu Báo Giá
               </h1>
               <p className="text-lg text-gray-600">
-                Hãy để lại thông tin để nhân viên tư vấn của chúng tôi gửi đến
+                Hãy để lại thông tin, chúng tôi gửi đến
                 bạn bảng báo giá chi tiết và các chương trình khuyến mãi mới
                 nhất.
               </p>
@@ -27,7 +27,7 @@ export default function QuotePage() {
 
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
               <h3 className="font-bold text-lg text-kia-red mb-4">
-                Quyền lợi khi mua xe tại KIA Nha Trang
+                Quyền lợi khi nhận báo giá tại KIA Khánh Hòa
               </h3>
               <ul className="space-y-4">
                 <li className="flex gap-3">
@@ -35,7 +35,7 @@ export default function QuotePage() {
                     1
                   </span>
                   <span className="text-gray-700">
-                    Giá xe tốt nhất thị trường với nhiều ưu đãi độc quyền.
+                    Giá xe tốt so với thị trường cùng nhiều ưu đãi độc quyền.
                   </span>
                 </li>
                 <li className="flex gap-3">
@@ -69,7 +69,7 @@ export default function QuotePage() {
             <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=1000"
+                src="/quote-form-banner.webp"
                 alt="KIA Customer"
                 className="absolute inset-0 w-full h-full object-cover"
               />

@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Về Chúng Tôi | KIA Nha Trang",
+  title: "Giới Thiệu | KIA Khánh Hòa",
   description:
-    "Giới thiệu về đại lý KIA Nha Trang - Showroom trưng bày, xưởng dịch vụ và đội ngũ nhân viên chuyên nghiệp.",
+    "Website KIA Khánh Hòa cung cấp thông tin chi tiết, cập nhật và chính xác về các dòng xe KIA tại Việt Nam.",
 };
 
 export default function AboutPage() {
@@ -13,22 +13,20 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="relative h-96 bg-gray-900 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          {/* Placeholder for About Hero Image */}
           <div className="absolute inset-0 bg-linear-to-r from-black/80 to-black/40 z-10"></div>
-          {/* Replace with actual showroom image */}
           <Image
-            src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=2000"
-            alt="KIA Nha Trang Showroom"
+            src="/introduce-banner.webp"
+            alt="Xe KIA hiện đại"
             fill
             className="object-cover"
           />
         </div>
         <div className="relative z-20 text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Về KIA Nha Trang
+            Giới Thiệu KIA Khánh Hòa
           </h1>
           <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-            Đại lý ủy quyền chính thức của KIA Motors tại Khánh Hòa
+            Nguồn thông tin tổng hợp về các dòng xe KIA
           </p>
         </div>
       </div>
@@ -38,31 +36,29 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
             <h2 className="text-3xl font-bold text-kia-dark mb-6">
-              Chào mừng đến với KIA Nha Trang
+              Chào mừng bạn đến với website KIA Khánh Hòa
             </h2>
             <div className="prose text-gray-600 space-y-4 text-justify">
               <p>
-                Tọa lạc tại vị trí đắc địa trên đường 23/10, TP. Nha Trang, KIA
-                Nha Trang là đại lý 3S chính hãng theo tiêu chuẩn toàn cầu của
-                KIA Motors. Chúng tôi tự hào mang đến cho khách hàng những sản
-                phẩm xe ô tô KIA chất lượng cao cùng dịch vụ hậu mãi chuyên
-                nghiệp.
+                KIA Khánh Hòa là website chuyên cung cấp thông tin về các dòng
+                xe KIA đang được phân phối tại thị trường Việt Nam. Trang web
+                được xây dựng với mục tiêu mang đến cho người dùng cái nhìn đầy
+                đủ, rõ ràng và dễ tiếp cận về sản phẩm.
               </p>
               <p>
-                Với diện tích xây dựng rộng lớn, showroom được thiết kế hiện
-                đại, sang trọng, tạo không gian thoải mái nhất cho Quý khách
-                hàng khi đến tham quan và lựa chọn xe. Đội ngũ tư vấn bán hàng
-                được đào tạo bài bản, am hiểu sản phẩm, luôn sẵn sàng hỗ trợ Quý
-                khách tìm được chiếc xe ưng ý nhất.
+                Tại đây, bạn có thể tìm thấy thông tin chi tiết về thiết kế,
+                trang bị, thông số kỹ thuật, giá tham khảo cũng như những điểm
+                nổi bật của từng mẫu xe KIA, giúp bạn dễ dàng so sánh và lựa
+                chọn mẫu xe phù hợp với nhu cầu.
               </p>
             </div>
           </div>
           <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=300"
-              alt="Showroom Interior"
+              src="/introduce-banner-2.avif"
+              alt="Thông tin xe KIA"
               fill
-              className="object-cover"
+              className="object-cover object-center"
             />
           </div>
         </div>
@@ -75,108 +71,111 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-8 rounded-xl text-center hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-kia-red rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                T
+                C
               </div>
-              <h3 className="text-xl font-bold mb-4">Tận Tâm</h3>
+              <h3 className="text-xl font-bold mb-4">Chính Xác</h3>
               <p className="text-gray-600">
-                Đặt lợi ích và sự hài lòng của khách hàng lên hàng đầu. Phục vụ
-                với thái độ nhiệt tình, chu đáo nhất.
+                Thông tin xe được tổng hợp rõ ràng, nhất quán và dễ hiểu cho
+                người dùng.
               </p>
             </div>
             <div className="bg-gray-50 p-8 rounded-xl text-center hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-kia-dark rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                 C
               </div>
-              <h3 className="text-xl font-bold mb-4">Chuyên Nghiệp</h3>
+              <h3 className="text-xl font-bold mb-4">Cập Nhật</h3>
               <p className="text-gray-600">
-                Quy trình làm việc bài bản, đội ngũ nhân sự trình độ cao, cơ sở
-                vật chất hiện đại chuẩn quốc tế.
+                Nội dung luôn được bổ sung và cập nhật theo các mẫu xe và phiên
+                bản mới.
               </p>
             </div>
             <div className="bg-gray-50 p-8 rounded-xl text-center hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                U
+                T
               </div>
-              <h3 className="text-xl font-bold mb-4">Uy Tín</h3>
+              <h3 className="text-xl font-bold mb-4">Thân Thiện</h3>
               <p className="text-gray-600">
-                Minh bạch trong mọi giao dịch, cam kết chất lượng sản phẩm và
-                dịch vụ đúng như đã công bố.
+                Giao diện trực quan, giúp người dùng dễ dàng tìm kiếm và tra cứu
+                thông tin.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Services */}
+        {/* Website Features */}
         <div>
           <h2 className="text-3xl font-bold text-center text-kia-dark mb-12">
-            Dịch Vụ Của Chúng Tôi
+            Nội Dung Trên Website
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex gap-4 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
               <div className="shrink-0 w-24 h-24 bg-gray-200 rounded-lg relative overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=300"
-                  alt="Sales"
+                  src="/carlist.jpg"
+                  alt="Dòng xe KIA"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Tư vấn mua xe mới</h3>
+                <h3 className="text-xl font-bold mb-2">Danh sách xe KIA</h3>
                 <p className="text-gray-600 text-sm">
-                  Cung cấp đầy đủ các dòng xe KIA mới nhất với nhiều ưu đãi hấp
-                  dẫn. Hỗ trợ lái thử xe tận nhà.
+                  Tổng hợp các mẫu xe KIA phổ biến cùng thông tin chi tiết từng
+                  phiên bản.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
               <div className="shrink-0 w-24 h-24 bg-gray-200 rounded-lg relative overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=300"
-                  alt="Service"
+                  src="/carspec.avif"
+                  alt="Thông số kỹ thuật"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Bảo hành & Bảo dưỡng</h3>
+                <h3 className="text-xl font-bold mb-2">Thông số & trang bị</h3>
                 <p className="text-gray-600 text-sm">
-                  Xưởng dịch vụ quy mô lớn, trang thiết bị hiện đại. Kỹ thuật
-                  viên được đào tạo chuyên sâu về xe KIA.
+                  Cung cấp thông số kỹ thuật, công nghệ và tiện nghi nổi bật của
+                  từng mẫu xe.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
               <div className="shrink-0 w-24 h-24 bg-gray-200 rounded-lg relative overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=300"
-                  alt="Parts"
+                  src="/converse.jpg"
+                  alt="Liên hệ báo giá xe KIA"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Phụ tùng chính hãng</h3>
+                <h3 className="text-xl font-bold mb-2">Liên Hệ Báo Giá</h3>
                 <p className="text-gray-600 text-sm">
-                  Cung cấp phụ tùng, phụ kiện chính hãng KIA, đảm bảo chất lượng
-                  và độ bền cho xe của bạn.
+                  Cung cấp kênh liên hệ nhanh chóng để người dùng tham khảo giá
+                  xe KIA theo từng dòng xe và phiên bản.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4 p-6 bg-white border border-gray-100 rounded-xl shadow-sm">
               <div className="shrink-0 w-24 h-24 bg-gray-200 rounded-lg relative overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=300"
-                  alt="Finance"
+                  src="/handshake.jpg"
+                  alt="Liên hệ và tư vấn xe KIA"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Hỗ trợ tài chính</h3>
+                <h3 className="text-xl font-bold mb-2">Liên Hệ & Tư Vấn</h3>
                 <p className="text-gray-600 text-sm">
-                  Tư vấn vay mua xe trả góp với lãi suất ưu đãi, thủ tục nhanh
-                  gọn, tỷ lệ duyệt vay cao.
+                  Hỗ trợ giải đáp thắc mắc và cung cấp thông tin liên quan đến
+                  các dòng xe KIA thông qua các kênh liên hệ trên website.
                 </p>
               </div>
             </div>

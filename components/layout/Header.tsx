@@ -26,7 +26,7 @@ export function Header() {
           {/* Logo */}
           <div className="flex lg:min-w-0 lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center space-x-2">
-              <span className="sr-only">KIA Nha Trang</span>
+              <span className="sr-only">KIA Khánh Hòa</span>
               {/* Replace with actual Logo Image later */}
               <Image
                 src="/logo-header.svg"
@@ -44,7 +44,7 @@ export function Header() {
           {/* Right Action Buttons */}
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
             <Link
-              href="tel:0905123456"
+              href="tel:0933806910"
               className={buttonVariants({
                 variant: "outline",
                 size: "sm",
@@ -52,7 +52,7 @@ export function Header() {
               })}
             >
               <PhoneIcon className="h-4 w-4" />
-              <span>Hotline: 0123.123.123</span>
+              <span>Hotline: 0933.806.910</span>
             </Link>
           </div>
 

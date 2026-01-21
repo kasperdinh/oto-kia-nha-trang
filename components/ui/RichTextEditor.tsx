@@ -4,9 +4,6 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-// Project uses HeroIcons in Admin Layout. Let's check package.json for Lucide.
-// package.json has "@heroicons/react": "^2.2.0". No Lucide.
-// I will use HeroIcons.
 
 import {
   BoldIcon,
@@ -15,9 +12,6 @@ import {
   ArrowUturnLeftIcon,
   ArrowUturnRightIcon,
 } from "@heroicons/react/24/outline";
-
-// Note: HeroIcons doesn't have H1/H2 icons easily, I'll use text or generic icons.
-// Actually standard TipTap uses own toolbar.
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MenuBar = ({ editor }: { editor: any }) => {
@@ -31,6 +25,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("bold") ? "bg-gray-200" : ""}`}
         title="Bold"
+        aria-label="Format Bold"
       >
         <BoldIcon className="w-5 h-5" />
       </button>
@@ -40,6 +35,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("italic") ? "bg-gray-200" : ""}`}
         title="Italic"
+        aria-label="Format Italic"
       >
         <ItalicIcon className="w-5 h-5" />
       </button>
@@ -51,6 +47,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("heading", { level: 2 }) ? "bg-gray-200" : ""}`}
         title="H2"
+        aria-label="Heading 2"
       >
         <span className="font-bold text-sm">H2</span>
       </button>
@@ -59,6 +56,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("heading", { level: 3 }) ? "bg-gray-200" : ""}`}
         title="H3"
+        aria-label="Heading 3"
       >
         <span className="font-bold text-sm">H3</span>
       </button>
@@ -70,6 +68,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("bulletList") ? "bg-gray-200" : ""}`}
         title="Bullet List"
+        aria-label="Bullet List"
       >
         <ListBulletIcon className="w-5 h-5" />
       </button>
@@ -78,6 +77,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={`p-1 rounded hover:bg-gray-200 ${editor.isActive("orderedList") ? "bg-gray-200" : ""}`}
         title="Ordered List"
+        aria-label="Ordered List"
       >
         <span className="font-bold text-sm px-1">1.</span>
       </button>
@@ -90,6 +90,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         disabled={!editor.can().chain().focus().undo().run()}
         className="p-1 rounded hover:bg-gray-200"
         title="Undo"
+        aria-label="Undo"
       >
         <ArrowUturnLeftIcon className="w-5 h-5" />
       </button>
@@ -99,6 +100,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
         disabled={!editor.can().chain().focus().redo().run()}
         className="p-1 rounded hover:bg-gray-200"
         title="Redo"
+        aria-label="Redo"
       >
         <ArrowUturnRightIcon className="w-5 h-5" />
       </button>

@@ -3,7 +3,7 @@ export const PROVINCES = [
   "Diên Khánh",
   "Cam Lâm",
   "Cam Ranh",
-  "Ninh Hoà",
+  "Ninh Hòa",
   "Vạn Ninh",
   "Khác",
 ] as const;

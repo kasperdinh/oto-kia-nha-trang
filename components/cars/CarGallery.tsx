@@ -41,7 +41,7 @@ export function CarGallery({ images }: { images: string[] }) {
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 group">
         <Image
           key={activeUrl} // Force re-render on image change to prevent stale image artifact
-          src={activeUrl}
+          src={activeUrl || ""}
           alt={`Car view ${safeIndex + 1}`}
           fill
           className="object-cover transition-transform duration-500 hover:scale-105"

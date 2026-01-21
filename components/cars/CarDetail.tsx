@@ -35,7 +35,7 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
       const sameColor = variant.colors.find(
         (c) => c.color.code === selectedColor?.color.code,
       );
-      setSelectedColor(sameColor || variant.colors[0]);
+      setSelectedColor(sameColor || variant.colors[0]!);
     } else {
       setSelectedColor(null);
     }
@@ -64,113 +64,14 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-12">
-      {/* Left Column: Gallery & Description - Spans 2 cols */}
-      <div className="lg:col-span-2 space-y-8">
+    <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 xl:gap-12">
+      {/* 1. Gallery - Order 1 on Mobile, Top-Left on Desktop */}
+      <div className="order-1 lg:col-span-2">
         <CarGallery images={currentImages} />
-
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-kia-dark mb-4">Giới thiệu</h2>
-          <div className="prose prose-red max-w-none text-gray-600">
-            <div dangerouslySetInnerHTML={{ __html: car.description }} />
-            {/* Fallback description content if needed */}
-            {!car.description && (
-              <p>
-                {car.name} mang đến trải nghiệm lái xe vượt trội với thiết kế
-                hiện đại, công nghệ tiên tiến và khả năng vận hành mạnh mẽ. Đây
-                là sự lựa chọn hoàn hảo cho những ai đang tìm kiếm sự tiện nghi,
-                an toàn và phong cách.
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Documents / Specs Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {car.documents?.find((d) => d.type === "SPEC_SHEET") ? (
-            <a
-              href={car.documents.find((d) => d.type === "SPEC_SHEET")?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-                className: "w-full flex items-center justify-center gap-2",
-              })}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                />
-              </svg>
-              Xem thông số kỹ thuật
-            </a>
-          ) : (
-            <button
-              disabled
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-                className: "w-full opacity-50 cursor-not-allowed",
-              })}
-            >
-              Đang cập nhật thông số kỹ thuật
-            </button>
-          )}
-
-          {car.documents?.find((d) => d.type === "BROCHURE") ? (
-            <a
-              href={car.documents.find((d) => d.type === "BROCHURE")?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({
-                variant: "secondary",
-                size: "lg",
-                className: "w-full flex items-center justify-center gap-2",
-              })}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-                />
-              </svg>
-              Xem tài liệu giới thiệu
-            </a>
-          ) : (
-            <button
-              disabled
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-                className: "w-full opacity-50 cursor-not-allowed",
-              })}
-            >
-              Đang cập nhật tài liệu giới thiệu
-            </button>
-          )}
-        </div>
       </div>
 
-      {/* Right Column: Pricing & CTAs - Spans 1 col */}
-      <div className="lg:col-span-1">
+      {/* 2. Pricing & CTAs - Order 2 on Mobile, Right Sidebar on Desktop */}
+      <div className="order-2 lg:col-span-1 lg:row-span-3">
         <div className="sticky top-24 space-y-6">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl">
             {/* Title & Badge */}
@@ -192,18 +93,18 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
 
             {/* Price Section */}
             <div className="mb-4">
-              <div className="flex items-baseline gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 {currentPromotionPrice ? (
                   <>
-                    <p className="text-4xl font-extrabold text-kia-red tracking-tight">
-                      {formatPrice(currentPromotionPrice)}
-                    </p>
                     <p className="text-lg text-gray-400 line-through">
                       {formatPrice(currentPrice)}
                     </p>
+                    <p className="text-3xl xl:text-4xl font-extrabold text-kia-red tracking-tight">
+                      {formatPrice(currentPromotionPrice)}
+                    </p>
                   </>
                 ) : (
-                  <p className="text-4xl font-extrabold text-kia-red tracking-tight">
+                  <p className="text-3xl xl:text-4xl font-extrabold text-kia-red tracking-tight">
                     {formatPrice(currentPrice)}
                   </p>
                 )}
@@ -321,15 +222,15 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
 
               <div className="grid grid-cols-2 gap-3">
                 <a
-                  href="tel:0905123456"
+                  href="tel:0933806910"
                   className="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 border border-gray-100 text-gray-700 hover:bg-red-50 hover:text-kia-red hover:border-red-100 transition-all group"
                 >
                   <PhoneIcon className="w-6 h-6 mb-1 text-gray-500 group-hover:text-kia-red transition-colors" />
-                  <span className="text-xs font-bold">0123.123.123</span>
+                  <span className="text-xs font-bold">0933.806.910</span>
                 </a>
 
                 <a
-                  href="#"
+                  href="https://zalo.me/0933806910"
                   className="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 border border-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-100 transition-all group"
                 >
                   <ChatBubbleLeftIcon className="w-6 h-6 mb-1 text-gray-500 group-hover:text-blue-600 transition-colors" />
@@ -350,8 +251,7 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
             </h3>
             <ul className="space-y-3 relative z-10">
               {[
-                "Xe có sẵn, giao ngay",
-                "Hỗ trợ trả góp 80%",
+                "Hỗ trợ trả góp lên đến 85%",
                 "Bảo hành 5 năm",
                 "Hỗ trợ đăng ký trọn gói",
               ].map((item, idx) => (
@@ -367,6 +267,108 @@ export function CarDetail({ car }: { car: CarDetailDTO }) {
               ))}
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* 3. Introduction & Specs - Order 3 on Mobile, Bottom-Left on Desktop */}
+      <div className="order-3 lg:col-span-2 space-y-8">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+          <h2 className="text-2xl font-bold text-kia-dark mb-4">Giới thiệu</h2>
+          <div className="prose prose-red max-w-none text-gray-600">
+            <div dangerouslySetInnerHTML={{ __html: car.description }} />
+            {/* Fallback description content if needed */}
+            {!car.description && (
+              <p>
+                {car.name} mang đến trải nghiệm lái xe vượt trội với thiết kế
+                hiện đại, công nghệ tiên tiến và khả năng vận hành mạnh mẽ. Đây
+                là sự lựa chọn hoàn hảo cho những ai đang tìm kiếm sự tiện nghi,
+                an toàn và phong cách.
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Documents / Specs Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {car.documents?.find((d) => d.type === "SPEC_SHEET") ? (
+            <a
+              href={car.documents.find((d) => d.type === "SPEC_SHEET")?.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+                className: "w-full flex items-center justify-center gap-2",
+              })}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                />
+              </svg>
+              Xem thông số kỹ thuật
+            </a>
+          ) : (
+            <button
+              disabled
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+                className: "w-full opacity-50 cursor-not-allowed",
+              })}
+            >
+              Đang cập nhật thông số kỹ thuật
+            </button>
+          )}
+
+          {car.documents?.find((d) => d.type === "BROCHURE") ? (
+            <a
+              href={car.documents.find((d) => d.type === "BROCHURE")?.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({
+                variant: "secondary",
+                size: "lg",
+                className: "w-full flex items-center justify-center gap-2",
+              })}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+                />
+              </svg>
+              Xem tài liệu giới thiệu
+            </a>
+          ) : (
+            <button
+              disabled
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+                className: "w-full opacity-50 cursor-not-allowed",
+              })}
+            >
+              Đang cập nhật tài liệu giới thiệu
+            </button>
+          )}
         </div>
       </div>
     </div>

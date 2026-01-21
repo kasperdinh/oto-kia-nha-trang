@@ -37,8 +37,8 @@ export function Footer() {
               />
             </div>
             <p className="text-sm leading-6 text-gray-300">
-              Ô Tô Kia Nha Trang chuyên giới thiệu các dòng xe Kia tại khu vực
-              Nha Trang. Chúng tôi cung cấp sản phẩm chính hãng, tư vấn mua xe
+              KIA Khánh Hòa chuyên giới thiệu các dòng xe KIA tại khu vực
+              Khánh Hòa. Chúng tôi cung cấp sản phẩm chính hãng, tư vấn mua xe
               và hỗ trợ các dịch vụ bảo hành, bảo dưỡng theo quy định của nhà
               sản xuất.
             </p>
@@ -52,11 +52,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <PhoneIcon className="h-5 w-5 shrink-0 text-kia-red" />
-                <span className="text-sm">Hotline: 0123.123.123</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <EnvelopeIcon className="h-5 w-5 shrink-0 text-kia-red" />
-                <span className="text-sm">test@mail.com</span>
+                <span className="text-sm">Hotline: 0933.806.910</span>
               </div>
             </div>
           </div>
@@ -124,17 +120,17 @@ export function Footer() {
                 <div className="mt-6 flex space-x-5">
                   {/* Placeholder social icons Hotline, Facebook, Zalo */}
                   <a
-                    href="tel:0905123456"
+                    href="tel:0933806910"
                     className="text-gray-400 hover:text-gray-300"
                   >
                     <span className="sr-only">Hotline</span>
                     <PhoneIcon className="h-6 w-6" aria-hidden="true" />
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-gray-300">
+                  <a href="https://zalo.me/0933806910" className="text-gray-400 hover:text-gray-300">
                     <span className="sr-only">Zalo</span>
                     <ZaloIcon className="h-6 w-6" aria-hidden="true" />
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-gray-300">
+                  <a href="https://www.facebook.com/profile.php?id=100080721695575" className="text-gray-400 hover:text-gray-300">
                     <span className="sr-only">Facebook</span>
                     <FacebookIcon
                       className="h-7.5 w-7.5 -mt-0.5"
@@ -150,7 +146,7 @@ export function Footer() {
           <div className="md:flex md:items-center md:justify-between">
             <div className="space-y-1">
               <p>
-                &copy; {new Date().getFullYear()} Ô Tô Kia Nha Trang. Website
+                &copy; {new Date().getFullYear()} KIA Khánh Hòa. Website
                 này dùng cho mục đích giới thiệu sản phẩm.
               </p>
               <p>

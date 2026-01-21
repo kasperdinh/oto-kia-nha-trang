@@ -24,7 +24,7 @@ export function ContactWidget() {
       >
         {/* Hotline Button */}
         <Link
-          href="tel:0905123456"
+          href="tel:0933806910"
           className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12"
           aria-label="Gọi ngay"
         >
@@ -40,7 +40,7 @@ export function ContactWidget() {
 
         {/* Zalo Button */}
         <Link
-          href="https://zalo.me/0905123456"
+          href="https://zalo.me/0933806910"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12"
@@ -58,7 +58,7 @@ export function ContactWidget() {
 
         {/* Facebook Button */}
         <Link
-          href="#"
+          href="https://www.facebook.com/profile.php?id=100080721695575"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-blue-600 shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12"

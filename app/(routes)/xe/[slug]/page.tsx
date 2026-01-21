@@ -20,7 +20,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${car.name} | Thông Số, Giá Lăn Bánh, Khuyến Mãi | KIA Nha Trang`,
+    title: `${car.name} | Thông Số, Giá Lăn Bánh, Khuyến Mãi | KIA Khánh Hòa`,
     description: car.description,
   };
 }

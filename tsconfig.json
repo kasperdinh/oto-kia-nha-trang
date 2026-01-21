@@ -23,8 +23,10 @@
       "@/components/*": ["./components/*"],
       "@/lib/*": ["./lib/*"],
       "@/public/*": ["./public/*"],
-      "@/app/*": ["./app/*"],
-    }
+      "@/app/*": ["./app/*"]
+    },
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
   },
   "include": [
     "next-env.d.ts",

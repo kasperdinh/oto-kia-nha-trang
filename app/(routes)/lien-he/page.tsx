@@ -8,9 +8,9 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const metadata: Metadata = {
-  title: "Liên Hệ | KIA Nha Trang",
+  title: "Liên Hệ | KIA Khánh Hòa",
   description:
-    "Liên hệ với KIA Nha Trang để được tư vấn về xe, báo giá, lái thử và dịch vụ bảo dưỡng.",
+    "Liên hệ với KIA Khánh Hòa để được tư vấn về xe, báo giá, lái thử và dịch vụ bảo dưỡng.",
 };
 
 export default function ContactPage() {
@@ -52,8 +52,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-semibold text-gray-900">Hotline</h4>
                   <p className="text-gray-600 text-sm mt-1">
-                    <span className="block">Kinh doanh: 0123.123.123</span>
-                    <span className="block">Dịch vụ: 0123.123.123</span>
+                    <span className="block">0933.806.910</span>
                   </p>
                 </div>
               </div>
@@ -63,7 +62,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email</h4>
-                  <p className="text-gray-600 text-sm mt-1">test@mail.com</p>
+                  <p className="text-gray-600 text-sm mt-1">Đang cập nhật...</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -87,8 +86,7 @@ export default function ContactPage() {
               Yêu cầu tư vấn
             </h3>
             <p className="text-gray-500 mb-8">
-              Điền thông tin vào biểu mẫu dưới đây nếu bạn cần tư vấn thêm, nhân
-              viên của chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+              Điền thông tin vào biểu mẫu dưới đây nếu bạn cần tư vấn thêm, chúng tôi sẽ phản hồi trong thời gian sớm nhất.
             </p>
             <ContactForm />
           </div>

@@ -8,31 +8,29 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "Tôi rất hài lòng với dịch vụ tại KIA Nha Trang. Nhân viên nhiệt tình, tư vấn chuyên nghiệp. Xe giao đúng hẹn và đầy đủ phụ kiện như cam kết.",
-    author: "Nguyễn Văn A",
-    role: "Khách hàng mua xe Seltos",
+      "Tôi rất hài lòng với dịch vụ tại KIA Khánh Hòa. Các bạn nhiệt tình, tư vấn chuyên nghiệp. Thông tin về xe rất chi tiết và chính xác.",
+    author: "Huỳnh Khánh Đông",
+    role: "Khách hàng mua xe Carnival",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100&h=100",
+    avatar: null,
   },
   {
     id: 2,
     quote:
       "Thủ tục mua xe trả góp rất nhanh chóng và đơn giản. Cảm ơn bạn tư vấn bán hàng đã hỗ trợ tôi rất nhiệt tình.",
-    author: "Trần Thị B",
+    author: "Khúc Thuỳ Hương",
     role: "Khách hàng mua xe K3",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100",
+    avatar: null,
   },
   {
     id: 3,
     quote:
-      "Xe KIA đẹp, nhiều option, giá cả hợp lý. Showroom rộng rãi, hiện đại. Sẽ giới thiệu bạn bè đến mua xe tại đây.",
-    author: "Lê Văn C",
-    role: "Khách hàng mua xe Carnival",
-    rating: 4,
-    avatar: null, // Test case without avatar
+      "Xe KIA đẹp, nhiều option, giá cả hợp lý. Showroom xem xe rộng rãi, hiện đại. Sẽ giới thiệu bạn bè đến mua xe tại đây.",
+    author: "Nguyễn Hữu Hải",
+    role: "Khách hàng mua xe Seltos",
+    rating: 5,
+    avatar: null,
   },
 ];
 
@@ -64,7 +62,7 @@ export function Testimonials() {
             Khách hàng nói gì về chúng tôi?
           </h2>
           <p className="mt-4 text-lg leading-8 text-gray-600">
-            Sự hài lòng của khách hàng là động lực phát triển của KIA Nha Trang.
+            Sự hài lòng của khách hàng là động lực phát triển của KIA Khánh Hòa.
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">

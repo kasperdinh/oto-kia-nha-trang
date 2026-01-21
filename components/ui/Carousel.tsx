@@ -27,13 +27,13 @@ export function Carousel({
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === items.length - 1 ? 0 : prevIndex + 1
+      prevIndex === items.length - 1 ? 0 : prevIndex + 1,
     );
   }, [items.length]);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+      prevIndex === 0 ? items.length - 1 : prevIndex - 1,
     );
   }, [items.length]);
 
@@ -63,6 +63,7 @@ export function Carousel({
 
       <button
         onClick={prevSlide}
+        aria-label="Previous slide"
         className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/30 p-2 text-white hover:bg-white/50 focus:outline-none backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <ChevronLeftIcon className="h-6 w-6" />
@@ -70,6 +71,7 @@ export function Carousel({
 
       <button
         onClick={nextSlide}
+        aria-label="Next slide"
         className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/30 p-2 text-white hover:bg-white/50 focus:outline-none backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <ChevronRightIcon className="h-6 w-6" />
@@ -80,9 +82,10 @@ export function Carousel({
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
             className={cn(
               "h-2 w-2 rounded-full transition-colors",
-              index === currentIndex ? "bg-white" : "bg-white/50"
+              index === currentIndex ? "bg-white" : "bg-white/50",
             )}
           />
         ))}

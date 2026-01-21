@@ -33,7 +33,7 @@ export function Promotions() {
                   Nhận Báo Giá Ngay
                 </Link>
                 <Link
-                  href="/khuyen-mai"
+                  href="/xe"
                   className={buttonVariants({
                     variant: "outline",
                     size: "lg",
@@ -51,7 +51,7 @@ export function Promotions() {
 
             <motion.img
               className="absolute inset-0 h-full w-full object-cover object-center lg:rounded-r-2xl transition-transform duration-700"
-              src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1000"
+              src="/promotions-banner.webp"
               alt="KIA Promotion"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.5 }}

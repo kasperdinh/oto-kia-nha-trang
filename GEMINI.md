@@ -1,4 +1,4 @@
-# KIA Nha Trang – Car Sales Website
+# KIA Khánh Hòa – Car Sales Website
 
 > **Purpose of this document**: This README is written to be **explicit, structured, and unambiguous**, so that **AI agents (code assistants, autonomous planners, copilots)** can understand the project context, constraints, and expected implementation behavior without additional human clarification.
 
@@ -6,7 +6,7 @@
 
 ## 📋 Project Overview
 
-This project is a **car sales website for the KIA Nha Trang dealership**, implemented as a **single Next.js fullstack application** using the **App Router**.
+This project is a **car sales website for the KIA Khánh Hòa dealership**, implemented as a **single Next.js fullstack application** using the **App Router**.
 
 The website focuses on **vehicle showcasing and lead collection**, not e‑commerce checkout. All user actions ultimately generate **sales leads** (quote requests, test-drive registrations, contact inquiries).
 
@@ -22,7 +22,6 @@ The website focuses on **vehicle showcasing and lead collection**, not e‑comme
 - **Frontend**: MVP under active development
 - **Backend**: Not separated; handled via Next.js Server Components, Route Handlers, and (future) Server Actions
 - **Data**:
-
   - Current: local **mock data** stored in `src/lib`
   - Planned: **Prisma + SQLite** (local) → extensible to PostgreSQL
 
@@ -41,7 +40,6 @@ This repository follows a **single-repo, fullstack Next.js architecture**.
 - One deployment unit
 - No separate backend service
 - Clear separation between:
-
   - UI components
   - Domain components
   - Data access
