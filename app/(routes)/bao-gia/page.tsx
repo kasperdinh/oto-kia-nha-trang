@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { QuoteForm } from "../../../components/forms/QuoteForm";
+import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Yêu Cầu Báo Giá | KIA Nha Trang",

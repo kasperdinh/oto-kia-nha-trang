@@ -7,18 +7,12 @@ import { FacebookIcon, ZaloIcon } from "../icons/Icons";
 
 const navigation = {
   products: [
-    { name: "KIA Morning", href: "/xe/kia-morning" },
-    { name: "KIA Soluto", href: "/xe/kia-soluto" },
-    { name: "KIA K3", href: "/xe/kia-k3" },
-    { name: "KIA K5", href: "/xe/kia-k5" },
-    { name: "KIA Sonet", href: "/xe/kia-sonet" },
-    { name: "KIA Seltos", href: "/xe/kia-seltos" },
-    { name: "KIA Sportage", href: "/xe/kia-sportage" },
-    { name: "KIA Sorento", href: "/xe/kia-sorento" },
-    { name: "KIA Carnival", href: "/xe/kia-carnival" },
+    { name: "Tất cả dòng xe", href: "/xe" },
+    { name: "SUV", href: "/xe?category=SUV" },
+    { name: "Sedan", href: "/xe?category=Sedan" },
+    { name: "Hatchback", href: "/xe?category=Hatchback" },
   ],
   support: [
-    { name: "Đăng ký lái thử", href: "/lai-thu" },
     { name: "Yêu cầu báo giá", href: "/bao-gia" },
     { name: "Liên hệ", href: "/lien-he" },
   ],
@@ -36,16 +30,17 @@ export function Footer() {
           <div className="space-y-8">
             <div className="flex items-center space-x-2">
               <Image
-                src="/logo-footer.png"
+                src="/logo-footer.svg"
                 alt="Logo"
                 width={100}
                 height={100}
               />
             </div>
             <p className="text-sm leading-6 text-gray-300">
-              Đại lý ủy quyền chính thức của KIA Motors Việt Nam tại Nha Trang.
-              Cung cấp các dòng xe KIA chính hãng, dịch vụ bảo hành, bảo dưỡng
-              chuyên nghiệp.
+              Ô Tô Kia Nha Trang chuyên giới thiệu các dòng xe Kia tại khu vực
+              Nha Trang. Chúng tôi cung cấp sản phẩm chính hãng, tư vấn mua xe
+              và hỗ trợ các dịch vụ bảo hành, bảo dưỡng theo quy định của nhà
+              sản xuất.
             </p>
             <div className="space-y-4">
               <div className="flex items-start gap-3 text-gray-300">
@@ -141,18 +136,43 @@ export function Footer() {
                   </a>
                   <a href="#" className="text-gray-400 hover:text-gray-300">
                     <span className="sr-only">Facebook</span>
-                    <FacebookIcon className="h-7.5 w-7.5 -mt-0.5" aria-hidden="true" />
+                    <FacebookIcon
+                      className="h-7.5 w-7.5 -mt-0.5"
+                      aria-hidden="true"
+                    />
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-          <p className="text-xs leading-5 text-gray-400">
-            &copy; {new Date().getFullYear()} KIA Nha Trang. All rights
-            reserved. Designed by kasperdinh.
-          </p>
+        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 text-xs leading-5 text-gray-400">
+          <div className="md:flex md:items-center md:justify-between">
+            <div className="space-y-1">
+              <p>
+                &copy; {new Date().getFullYear()} Ô Tô Kia Nha Trang. Website
+                này dùng cho mục đích giới thiệu sản phẩm.
+              </p>
+              <p>
+                Website không phải là trang web chính thức của Kia Motors Việt
+                Nam.
+              </p>
+              <p>KIA&reg; là thương hiệu đã đăng ký của Kia Motors Việt Nam.</p>
+            </div>
+            <div className="mt-4 md:order-2 md:mt-0">
+              <p>
+                Thiết kế và phát triển bởi{" "}
+                <a
+                  href="https://kasperdinh.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-gray-300 hover:text-white"
+                >
+                  kasperdinh
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

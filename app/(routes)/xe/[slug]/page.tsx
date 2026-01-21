@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { CarDetail } from "../../../../components/cars/CarDetail";
-import { getCarBySlug } from "@/lib/data/cars";
+import { CarDetail } from "@/components/cars/CarDetail";
+import { getCarDetail } from "@/services/car.service";
+import { toCarDetailDTO } from "@/dtos/car.dto";
 
 // Since this is a dynamic route, we need to generate metadata dynamically
 export async function generateMetadata({
@@ -10,7 +11,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const car = await getCarBySlug(resolvedParams.slug);
+  const car = await getCarDetail(resolvedParams.slug);
 
   if (!car) {
     return {
@@ -32,7 +33,13 @@ export default async function CarDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const car = await getCarBySlug(resolvedParams.slug);
+  const carData = await getCarDetail(resolvedParams.slug);
+
+  if (!carData) {
+    notFound();
+  }
+
+  const car = toCarDetailDTO(carData);
 
   if (!car) {
     notFound();

@@ -70,7 +70,7 @@ export function Sidebar({ isOpen, onClose, navigation }: SidebarProps) {
           <div className="pt-4 border-t mt-4">
             <Link
               href="/bao-gia"
-              className="block w-full text-center px-4 py-3 rounded-md bg-kia-red text-white font-medium hover:bg-red-700 transition-colors"
+              className="block w-full text-center px-4 py-3 rounded-md bg-kia-red text-white font-medium hover:bg-kia-red-hover transition-colors"
               onClick={onClose}
             >
               Nhận Báo Giá

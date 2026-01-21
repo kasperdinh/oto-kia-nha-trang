@@ -1,41 +1,69 @@
 import { MetadataRoute } from "next";
-import prisma from "../lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Use VERCEL_URL if available, otherwise localhost or fixed domain
   const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000";
+    : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  // Static routes
-  const routes = [
-    "",
-    "/xe",
-    "/bao-gia",
-    "/lai-thu",
-    "/lien-he",
-    "/gioi-thieu",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1 : 0.8,
-  }));
+  // 1. Static Routes
+  const staticRoutes = [
+    {
+      url: `${baseUrl}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/xe`,
+      lastModified: new Date(),
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/bao-gia`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
 
-  // Dynamic routes (Cars)
-  // Check if DB is available (might fail during build if not seeded/connected)
+    {
+      url: `${baseUrl}/lien-he`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/gioi-thieu`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+  ];
+
+  // 2. Dynamic Routes (Cars)
   let carRoutes: MetadataRoute.Sitemap = [];
   try {
-    const cars = await prisma.car.findMany();
-    carRoutes = cars.map((car) => ({
+    const cars = await prisma.car.findMany({
+      where: {
+        isPublic: true,
+      },
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    carRoutes = cars.map((car: any) => ({
       url: `${baseUrl}/xe/${car.slug}`,
       lastModified: car.updatedAt,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     }));
   } catch (error) {
-    console.warn("Could not fetch cars for sitemap generation", error);
+    console.error("Sitemap: Failed to fetch cars", error);
   }
 
-  return [...routes, ...carRoutes];
+  return [...staticRoutes, ...carRoutes];
 }

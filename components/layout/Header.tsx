@@ -22,17 +22,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 sm:h-20 items-center justify-between">
+        <div className="flex h-13 sm:h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex lg:min-w-0 lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center space-x-2">
               <span className="sr-only">KIA Nha Trang</span>
               {/* Replace with actual Logo Image later */}
               <Image
-                src="/logo-header.png"
+                src="/logo-header.svg"
                 alt="Logo"
                 width={100}
                 height={100}
+                priority
               />
             </Link>
           </div>
@@ -52,12 +53,6 @@ export function Header() {
             >
               <PhoneIcon className="h-4 w-4" />
               <span>Hotline: 0123.123.123</span>
-            </Link>
-            <Link
-              href="/lai-thu"
-              className={buttonVariants({ variant: "primary", size: "sm" })}
-            >
-              Đăng ký lái thử
             </Link>
           </div>
 

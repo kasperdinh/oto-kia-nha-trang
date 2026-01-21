@@ -14,14 +14,14 @@ const inter = Inter({
   display: "swap",
 });
 
-import { Header } from "../components/layout/Header";
-import { Footer } from "../components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
-import { ContactWidget } from "../components/layout/ContactWidget";
+import { ContactWidget } from "@/components/layout/ContactWidget";
 
 export const metadata: Metadata = {
-  title: "KIA Nha Trang - Đại lý chính hãng",
-  description: "Mua bán xe ô tô KIA chính hãng tại Nha Trang",
+  title: "Ô Tô KIA Nha Trang - Giới thiệu xe ô tô KIA chính hãng tại Nha Trang",
+  description: "Giới thiệu xe ô tô KIA chính hãng tại Nha Trang",
 };
 
 export default function RootLayout({

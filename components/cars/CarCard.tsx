@@ -8,13 +8,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/Card";
-import { buttonVariants } from "../ui/Button";
+} from "@/components/ui/Card";
+import { buttonVariants } from "@/components/ui/Button";
 
-import { CarData } from "@/lib/data/cars";
+import { CarDTO } from "@/dtos/car.dto";
 
 interface CarCardProps {
-  car: CarData;
+  car: CarDTO;
 }
 
 export function CarCard({ car }: CarCardProps) {

@@ -12,25 +12,25 @@ The website focuses on **vehicle showcasing and lead collection**, not e‑comme
 
 ### High-level Goals
 
-* Present KIA car models in a **modern, premium, brand-consistent UI**
-* Optimize for **SEO**, **performance**, and **mobile-first UX**
-* Collect **high-quality leads** for dealership staff
-* Maintain a **simple, scalable fullstack architecture** suitable for small teams
+- Present KIA car models in a **modern, premium, brand-consistent UI**
+- Optimize for **SEO**, **performance**, and **mobile-first UX**
+- Collect **high-quality leads** for dealership staff
+- Maintain a **simple, scalable fullstack architecture** suitable for small teams
 
 ### Current Status
 
-* **Frontend**: MVP under active development
-* **Backend**: Not separated; handled via Next.js Server Components, Route Handlers, and (future) Server Actions
-* **Data**:
+- **Frontend**: MVP under active development
+- **Backend**: Not separated; handled via Next.js Server Components, Route Handlers, and (future) Server Actions
+- **Data**:
 
-  * Current: local **mock data** stored in `src/lib`
-  * Planned: **Prisma + SQLite** (local) → extensible to PostgreSQL
+  - Current: local **mock data** stored in `src/lib`
+  - Planned: **Prisma + SQLite** (local) → extensible to PostgreSQL
 
 ### Non-goals (Explicit Constraints)
 
-* ❌ No online payments
-* ❌ No real-time chat system
-* ❌ No microservices architecture
+- ❌ No online payments
+- ❌ No real-time chat system
+- ❌ No microservices architecture
 
 ---
 
@@ -38,21 +38,21 @@ The website focuses on **vehicle showcasing and lead collection**, not e‑comme
 
 This repository follows a **single-repo, fullstack Next.js architecture**.
 
-* One deployment unit
-* No separate backend service
-* Clear separation between:
+- One deployment unit
+- No separate backend service
+- Clear separation between:
 
-  * UI components
-  * Domain components
-  * Data access
-  * Server logic
+  - UI components
+  - Domain components
+  - Data access
+  - Server logic
 
 ### Architectural Principles
 
-* **Server-first** (Server Components by default)
-* **Client Components only when required** (forms, animations, interactions)
-* **Colocation**: components live close to the routes that use them
-* **Predictable structure** so AI can infer responsibilities
+- **Server-first** (Server Components by default)
+- **Client Components only when required** (forms, animations, interactions)
+- **Colocation**: components live close to the routes that use them
+- **Predictable structure** so AI can infer responsibilities
 
 ---
 
@@ -69,34 +69,46 @@ oto-kia-nha-trang/
 │   │   ├── lien-he/           # Contact
 │   │   └── gioi-thieu/        # About
 │   │
-│   ├── api/                  # Route Handlers (future backend)
 │   ├── globals.css           # Global styles & Tailwind layers
 │   └── layout.tsx            # Root layout (HTML shell)
-│   └── page.tsx              # Root page (HTML shell)
-│   └── not-found.tsx         # 404 page
-│   └── redirect.tsx          # Redirect page
-│   └── loading.tsx           # Loading page
-│   └── error.tsx             # Error page
 │
-├── components/               # React components
+├── components/               # React components (UI)
 │   ├── cars/                 # Car domain components
 │   ├── forms/                # Lead capture forms
 │   ├── home/                 # Homepage sections
 │   ├── layout/               # Header / Footer / Navigation
 │   └── ui/                   # Design system primitives
 │
-├── lib/                      # Utilities & domain logic
-│   ├── data/                 # Data access
+├── lib/                      # Infrastructure & Utilities
+│   ├── prisma.ts             # Prisma Client Singleton
+│   ├── auth.ts               # Auth Helper
+│   ├── data/                 # Legacy Data Access (to be migrated)
 │   ├── constants/            # Constants & enums
 │   └── utils/                # Utilities
 │
-├── prisma/                   # Prisma schema & migrations (planned)
-├── public/                   # Static assets (images, icons)
+├── repositories/             # Data Access Layer (ORM ONLY)
+│   └── car.repository.ts
+│
+├── services/                 # Business Logic Layer
+│   └── car.service.ts
+│
+├── validators/               # Input Validation (Zod)
+│   └── car.query.ts
+│
+├── dtos/                     # Data Transfer Objects (Output Mapping)
+│   └── car.dto.ts
+│
+├── types/                    # Domain Types
+│   └── user.ts
+│
+├── prisma/                   # Prisma schema & migrations
+├── public/                   # Static assets
 ├── package.json
 └── README.md
 ```
 
 > **AI rule**: Do not introduce new top-level folders without strong justification.
+> **Architecture note**: The project follows Clean Architecture principles with `repositories`, `services`, `validators`, and `dtos` at the root level.
 
 ---
 
@@ -112,9 +124,9 @@ oto-kia-nha-trang/
 
 ### Supporting Libraries
 
-* **Framer Motion** – animations & page transitions
-* **Lucide / Heroicons** – iconography
-* **clsx + tailwind-merge** – conditional class handling
+- **Framer Motion** – animations & page transitions
+- **Lucide / Heroicons** – iconography
+- **clsx + tailwind-merge** – conditional class handling
 
 ---
 
@@ -140,32 +152,32 @@ All public routes live under `src/app/(routes)`.
 
 ### `components/cars/`
 
-* `CarCard`: summary card (image, name, price range)
-* `CarList`: grid/list layout
-* `CarGallery`: image slider
-* `CarSpecs`: technical specifications table
+- `CarCard`: summary card (image, name, price range)
+- `CarList`: grid/list layout
+- `CarGallery`: image slider
+- `CarSpecs`: technical specifications table
 
 ### `components/forms/`
 
-* QuoteForm
-* TestDriveForm
-* ContactForm
+- QuoteForm
+- TestDriveForm
+- ContactForm
 
 > All forms:
 >
-> * Validate input
-> * Be client components
-> * Submit to server actions or API routes
+> - Validate input
+> - Be client components
+> - Submit to server actions or API routes
 
 ### `components/ui/`
 
 Reusable primitives:
 
-* Button
-* Card
-* Modal
-* Carousel
-* Input / Select
+- Button
+- Card
+- Modal
+- Carousel
+- Input / Select
 
 > **AI rule**: UI components must be stateless and reusable.
 
@@ -188,15 +200,15 @@ Reusable primitives:
 
 ### Design Principles
 
-* Premium & minimal
-* Strong typography hierarchy
-* Clear CTAs
-* High contrast & accessibility aware
+- Premium & minimal
+- Strong typography hierarchy
+- Clear CTAs
+- High contrast & accessibility aware
 
 ### Typography
 
-* Headings: **Montserrat**
-* Body: **Inter**
+- Headings: **Montserrat**
+- Body: **Inter**
 
 ---
 
@@ -212,10 +224,10 @@ npm run lint     # Lint + type check
 
 ### Coding Rules (AI-Enforced)
 
-* Prefer Server Components
-* Avoid `use client` unless required
-* Strong typing for props & data
-* No inline magic values (use constants)
+- Prefer Server Components
+- Avoid `use client` unless required
+- Strong typing for props & data
+- No inline magic values (use constants)
 
 ---
 
@@ -223,19 +235,19 @@ npm run lint     # Lint + type check
 
 ### MVP (Current Phase)
 
-* Responsive layout
-* Homepage sections
-* Car listing (mock data)
-* Car detail pages
-* Quote / Test Drive / Contact forms
-* About page
+- Responsive layout
+- Homepage sections
+- Car listing (mock data)
+- Car detail pages
+- Quote / Test Drive / Contact forms
+- About page
 
 ### Planned
 
-* Prisma + SQLite
-* Server Actions
-* Basic admin dashboard
-* Deployment on Vercel
+- Prisma + SQLite
+- Server Actions
+- Basic admin dashboard
+- Deployment on Vercel
 
 ---
 
@@ -243,13 +255,13 @@ npm run lint     # Lint + type check
 
 This project is designed to be:
 
-* Easy to reason about
-* Safe for autonomous refactoring
-* Predictable in structure
+- Easy to reason about
+- Safe for autonomous refactoring
+- Predictable in structure
 
 **AI agents should**:
 
-* Follow existing folder conventions
-* Reuse UI primitives
-* Preserve SEO semantics
-* Avoid over-engineering
+- Follow existing folder conventions
+- Reuse UI primitives
+- Preserve SEO semantics
+- Avoid over-engineering

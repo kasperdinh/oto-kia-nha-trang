@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import { CarList } from "../../../components/cars/CarList";
-import { getAllCars } from "@/lib/data/cars";
+import { CarList } from "@/components/cars/CarList";
+import { getPublicCars } from "@/services/car.service";
+import { toCarDTO } from "@/dtos/car.dto";
 
 export const metadata: Metadata = {
   title: "Danh Sách Xe | KIA Nha Trang",
@@ -10,8 +11,14 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function CarListPage() {
-  const cars = await getAllCars();
+export default async function CarListPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
+  const { data } = await getPublicCars(category);
+  const cars = data.map(toCarDTO);
 
   return (
     <div className="bg-white min-h-screen py-12">
@@ -26,7 +33,7 @@ export default async function CarListPage() {
           </p>
         </div>
 
-        <CarList cars={cars} />
+        <CarList cars={cars} currentCategory={category} />
       </div>
     </div>
   );

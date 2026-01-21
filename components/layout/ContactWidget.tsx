@@ -26,15 +26,15 @@ export function ContactWidget() {
         <Link
           href="tel:0905123456"
           className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12"
-          aria-label="Gọi Hotline"
+          aria-label="Gọi ngay"
         >
           <span className="absolute right-full mr-4 hidden whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:block group-hover:opacity-100">
-            Gọi Hotline
+            Gọi ngay
           </span>
-          <PhoneIcon className="h-5 w-5 animate-tada md:h-6 md:w-6" />
+          <PhoneIcon className="h-5 w-5 md:h-6 md:w-6" />
           <span className="absolute -right-1 -top-1 flex h-4 w-4">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex h-4 w-4 rounded-full bg-red-500"></span>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-kia-red opacity-75"></span>
+            <span className="relative inline-flex h-4 w-4 rounded-full bg-kia-red"></span>
           </span>
         </Link>
 
@@ -51,8 +51,8 @@ export function ContactWidget() {
           </span>
           <ZaloIcon className="h-6 w-6 text-current md:h-7 md:w-7" />
           <span className="absolute -right-1 -top-1 flex h-4 w-4">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex h-4 w-4 rounded-full bg-red-500"></span>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-kia-red opacity-75"></span>
+            <span className="relative inline-flex h-4 w-4 rounded-full bg-kia-red"></span>
           </span>
         </Link>
 
@@ -69,8 +69,8 @@ export function ContactWidget() {
           </span>
           <FacebookIcon className="h-full w-full text-current" />
           <span className="absolute -right-1 -top-1 flex h-4 w-4">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex h-4 w-4 rounded-full bg-red-500"></span>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-kia-red opacity-75"></span>
+            <span className="relative inline-flex h-4 w-4 rounded-full bg-kia-red"></span>
           </span>
         </Link>
       </div>
@@ -78,9 +78,17 @@ export function ContactWidget() {
       {/* Main Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12"
+        className={`group relative flex h-10 w-10 items-center justify-center rounded-full bg-kia-red text-white shadow-lg transition-transform hover:scale-110 focus:outline-none md:h-12 md:w-12 ${
+          !isOpen ? "animate-tada" : ""
+        }`}
         aria-label="Liên hệ"
       >
+        {!isOpen && (
+          <span className="absolute -right-1 -top-1 flex h-4 w-4 z-10">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-kia-red opacity-75"></span>
+            <span className="relative inline-flex h-4 w-4 rounded-full bg-kia-red"></span>
+          </span>
+        )}
         <div className="relative h-6 w-6 md:h-7 md:w-7">
           <ChatBubbleOvalLeftEllipsisIcon
             className={`absolute inset-0 h-full w-full transition-transform duration-300 ${

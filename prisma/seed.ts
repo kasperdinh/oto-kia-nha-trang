@@ -1,319 +1,247 @@
 import prisma from "@/lib/prisma";
+import bcrypt from "bcryptjs";
+
+// --- DATA DEFINITIONS ---
+
+const COLORS = [
+  {
+    nameVI: "Trắng Ngọc Trai",
+    nameEN: "Snow White Pearl",
+    code: "GWP",
+    hexCode: "#ffffff",
+  },
+  { nameVI: "Đỏ", nameEN: "Red", code: "CR5", hexCode: "#bb162b" },
+  { nameVI: "Xanh", nameEN: "Blue", code: "B2", hexCode: "#1F4FA3" },
+  { nameVI: "Đen", nameEN: "Aurora Black", code: "ABP", hexCode: "#000000" },
+  { nameVI: "Xám", nameEN: "Steel Gray", code: "KLG", hexCode: "#808080" },
+];
 
 const CARS = [
   {
-    id: "1",
     name: "KIA Seltos",
     slug: "kia-seltos",
-    price: 604000000,
-    promotionPrice: 599000000,
     category: "SUV",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     description:
-      "KIA Seltos - Mẫu SUV đô thị dẫn đầu xu hướng với thiết kế mạnh mẽ, thể thao, nhiều tiện nghi cao cấp và khả năng vận hành linh hoạt.",
+      "<p><strong>KIA Seltos</strong> - Mẫu SUV đô thị dẫn đầu xu hướng với thiết kế mạnh mẽ, thể thao, nhiều tiện nghi cao cấp và khả năng vận hành linh hoạt.</p>",
+    variants: [
+      {
+        name: "1.4L Turbo Luxury",
+        price: 604000000,
+        promotionPrice: 599000000,
+      },
+      {
+        name: "1.4L Turbo Premium",
+        price: 699000000,
+        promotionPrice: 689000000,
+      },
+    ],
+    // Common images for gallery
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "1.4L Turbo",
-      power: "138 HP",
-      torque: "242 Nm",
-      transmission: "7 DCT",
-      fuelType: "Xăng",
-      fuelConsumption: "6.3L/100km",
-      seats: 5,
-      dimensions: {
-        length: 4315,
-        width: 1800,
-        height: 1645,
-        wheelbase: 2610,
-      },
-      features: [
-        "Màn hình giải trí 10.25 inch",
-        "Đèn Moodlight",
-        "Cửa sổ trời",
-        "Làm mát ghế",
-      ],
-    },
   },
   {
-    id: "2",
     name: "KIA Sonet",
     slug: "kia-sonet",
-    price: 519000000,
     category: "SUV",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     description:
-      "KIA Sonet - SUV Đô thị nhỏ gọn, năng động và thông minh. Thiết kế hiện đại, gầm cao linh hoạt.",
+      "<p><strong>KIA Sonet</strong> - SUV Đô thị nhỏ gọn, năng động và thông minh.</p>",
+    variants: [
+      {
+        name: "Premium",
+        price: 519000000,
+        promotionPrice: undefined, // Explicitly undefined
+      },
+    ],
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "1.5L Smartstream",
-      power: "113 HP",
-      torque: "144 Nm",
-      transmission: "IVT",
-      fuelType: "Xăng",
-      fuelConsumption: "5.7L/100km",
-      seats: 5,
-      dimensions: {
-        length: 4120,
-        width: 1790,
-        height: 1642,
-        wheelbase: 2500,
-      },
-      features: [
-        "Sạc không dây",
-        "Đề nổ từ xa",
-        "Cửa sổ trời",
-        "Màn hình 10.25 inch",
-      ],
-    },
   },
   {
-    id: "3",
     name: "KIA Carnival",
     slug: "kia-carnival",
-    price: 1189000000,
     category: "MPV",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     description:
-      "KIA Carnival - SUV đô thị cỡ lớn, sang trọng và đẳng cấp. Tiện nghi hàng đầu phân khúc.",
+      "<p><strong>KIA Carnival</strong> - SUV đô thị cỡ lớn, sang trọng và đẳng cấp.</p>",
+    variants: [
+      {
+        name: "Signature",
+        price: 1189000000,
+        promotionPrice: undefined,
+      },
+    ],
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "2.2L Smartstream Diesel",
-      power: "199 HP",
-      torque: "440 Nm",
-      transmission: "8 AT",
-      fuelType: "Dầu",
-      fuelConsumption: "7.0L/100km",
-      seats: 7,
-      dimensions: {
-        length: 5155,
-        width: 1995,
-        height: 1775,
-        wheelbase: 3090,
-      },
-      features: [
-        "Ghế thương gia",
-        "Cửa trượt điện",
-        "Màn hình kép 12.3 inch",
-        "ADAS cao cấp",
-      ],
-    },
   },
   {
-    id: "4",
     name: "KIA K3",
     slug: "kia-k3",
-    price: 549000000,
     category: "Sedan",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     description:
-      "KIA K3 - Sedan hạng C chuẩn mực công nghệ, thiết kế thể thao và trẻ trung.",
+      "<p><strong>KIA K3</strong> - Sedan hạng C chuẩn mực công nghệ.</p>",
+    variants: [
+      {
+        name: "Premium",
+        price: 549000000,
+        promotionPrice: undefined,
+      },
+    ],
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "1.6L Gamma",
-      power: "126 HP",
-      torque: "155 Nm",
-      transmission: "6 AT",
-      fuelType: "Xăng",
-      fuelConsumption: "6.5L/100km",
-      seats: 5,
-      dimensions: {
-        length: 4640,
-        width: 1800,
-        height: 1450,
-        wheelbase: 2700,
-      },
-      features: [
-        "Sạc không dây",
-        "Cốp điện thông minh",
-        "Làm mát ghế",
-        "Cửa sổ trời",
-      ],
-    },
   },
   {
-    id: "5",
     name: "KIA Morning",
     slug: "kia-morning",
-    price: 369000000,
     category: "Hatchback",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     description:
-      "KIA Morning - Mẫu xe đô thị nhỏ gọn, linh hoạt và tiết kiệm nhiên liệu.",
+      "<p><strong>KIA Morning</strong> - Mẫu xe đô thị nhỏ gọn, linh hoạt.</p>",
+    variants: [
+      {
+        name: "GT-Line",
+        price: 369000000,
+        promotionPrice: undefined,
+      },
+    ],
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "1.2L Kappa",
-      power: "83 HP",
-      torque: "120 Nm",
-      transmission: "4 AT",
-      fuelType: "Xăng",
-      fuelConsumption: "5.5L/100km",
-      seats: 5,
-      dimensions: {
-        length: 3595,
-        width: 1595,
-        height: 1485,
-        wheelbase: 2400,
-      },
-      features: ["Màn hình AVN 8 inch", "Camera lùi", "Điều hòa tự động"],
-    },
   },
   {
-    id: "6",
     name: "KIA Sorento",
     slug: "kia-sorento",
-    price: 999000000,
     category: "SUV",
-    imageUrl:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
-    description:
-      "KIA Sorento - SUV 7 chỗ sang trọng, mạnh mẽ và an toàn hàng đầu.",
+    description: "<p><strong>KIA Sorento</strong> - SUV 7 chỗ sang trọng.</p>",
+    variants: [
+      {
+        name: "Signature Diesel",
+        price: 999000000,
+        promotionPrice: undefined,
+      },
+    ],
     images: [
       "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
     ],
-    specs: {
-      engine: "2.2L Smartstream Diesel",
-      power: "198 HP",
-      torque: "440 Nm",
-      transmission: "8 DCT",
-      fuelType: "Dầu",
-      fuelConsumption: "6.0L/100km",
-      seats: 7,
-      dimensions: {
-        length: 4810,
-        width: 1900,
-        height: 1700,
-        wheelbase: 2815,
-      },
-      features: [
-        "Màn hình 12.3 inch",
-        "Camera 360",
-        "Phanh tay điện tử",
-        "Cần số nút xoay",
-      ],
-    },
-  },
-];
-
-// Create Mock Leads
-const LEADS = [
-  {
-    type: "QUOTE",
-    name: "Nguyễn Văn A",
-    phone: "0901234567",
-    email: "vana@gmail.com",
-    carModel: "KIA K3",
-    location: "Nha Trang",
-    installment: "no",
-    status: "PENDING",
-  },
-  {
-    type: "TEST_DRIVE",
-    name: "Trần Thị B",
-    phone: "0912345678",
-    carModel: "KIA Seltos",
-    date: "2024-02-20",
-    status: "PROCESSED",
-  },
-  {
-    type: "CONTACT",
-    name: "Lê Văn C",
-    phone: "0987654321",
-    message: "Xin hỏi giá lăn bánh KIA Sonet tại Nha Trang?",
-    status: "PENDING",
-  },
-  {
-    type: "QUOTE",
-    name: "Phạm Thị D",
-    phone: "0955555555",
-    carModel: "KIA Carnival",
-    installment: "yes",
-    status: "ARCHIVED",
   },
 ];
 
 async function main() {
   console.log("Start seeding ...");
 
-  // Seed Cars
-  for (const car of CARS) {
-    const { specs, images } = car;
+  // 1. Seed Colors
+  for (const color of COLORS) {
+    await prisma.colorMaster.upsert({
+      where: { code: color.code }, // Use code as unique identifier for upsert
+      update: {
+        nameVI: color.nameVI,
+        nameEN: color.nameEN,
+        hexCode: color.hexCode,
+      },
+      create: {
+        nameVI: color.nameVI,
+        nameEN: color.nameEN,
+        code: color.code,
+        hexCode: color.hexCode,
+      },
+    });
+  }
 
+  // Re-fetch all colors to get IDs
+  const allColors = await prisma.colorMaster.findMany();
+
+  // 2. Seed Cars
+  for (const car of CARS) {
     // Create Car
-    await prisma.car.upsert({
+    const createdCar = await prisma.car.upsert({
       where: { slug: car.slug },
       update: {
-        price: car.price,
-        promotionPrice: car.promotionPrice,
-        imageUrl: car.imageUrl,
-        specs: {
-          update: {
-            features: JSON.stringify(specs.features),
-          },
-        },
+        name: car.name,
+        category: car.category,
+        description: car.description,
       },
-
       create: {
         slug: car.slug,
         name: car.name,
-        price: car.price,
-        promotionPrice: car.promotionPrice,
-        description: car.description,
         category: car.category,
-        seats: car.specs.seats,
-        engine: car.specs.engine,
-        imageUrl: car.imageUrl,
-
-        // Create related CarSpec
-        specs: {
-          create: {
-            engine: specs.engine,
-            power: specs.power,
-            torque: specs.torque,
-            transmission: specs.transmission,
-            fuelType: specs.fuelType,
-            fuelConsumption: specs.fuelConsumption,
-            seats: specs.seats,
-            length: specs.dimensions.length,
-            width: specs.dimensions.width,
-            height: specs.dimensions.height,
-            wheelbase: specs.dimensions.wheelbase,
-            features: JSON.stringify(specs.features),
-          },
-        },
-
-        // Create related CarImages
+        description: car.description,
+        // Add random gallery images
         images: {
-          create: images.map((url) => ({ url })),
+          create: car.images.map((url) => ({ url })),
         },
       },
     });
+
+    // Create Variants
+    for (const variant of car.variants) {
+      const createdVariant = await prisma.carVariant.create({
+        data: {
+          carId: createdCar.id,
+          name: variant.name,
+          price: variant.price,
+          promotionPrice: variant.promotionPrice,
+        },
+      });
+
+      // Assign random colors to this variant
+      // Let's take first 3 colors for demo
+      const selectedColors = allColors.slice(0, 3);
+      for (const color of selectedColors) {
+        await prisma.carColor.create({
+          data: {
+            variantId: createdVariant.id,
+            colorMasterId: color.id,
+            // Add a mock image for this specific color variant
+            images: {
+              create: {
+                url: car.images[0], // Re-use main image for demo
+              },
+            },
+          },
+        });
+      }
+    }
   }
 
-  // Seed Leads
-  for (const lead of LEADS) {
-    await prisma.lead.create({
-      data: lead,
-    });
+  // 3. Seed Leads (Legacy format adapted)
+  // ... Keep mostly same, just check mandatory fields
+  // Leads don't depend on Car ID strongly in the original Code (just text), so we can keep it as string.
+
+  console.log("Seeding 100 random leads...");
+  // ... (Same random logic)
+  const NAMES = ["Nguyễn Văn A", "Trần Thị B", "Lê Văn C"];
+  const TYPES = ["QUOTE", "CONTACT"];
+  const STATUSES = ["PENDING", "PROCESSED", "ARCHIVED"];
+
+  const leadsData = Array.from({ length: 20 }).map(() => {
+    // Reduced to 20 for speed
+    return {
+      type: TYPES[Math.floor(Math.random() * TYPES.length)],
+      name: NAMES[Math.floor(Math.random() * NAMES.length)],
+      phone: "0900000000",
+      email: "demo@example.com",
+      carModel: "KIA Seltos",
+      status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
+    };
+  });
+
+  for (const lead of leadsData) {
+    await prisma.lead.create({ data: lead });
   }
+
+  // Seed Admin User
+  const hashedPassword = await bcrypt.hash("admin123", 10);
+  await prisma.user.upsert({
+    where: { email: "admin@kia.com" },
+    update: {},
+    create: {
+      email: "admin@kia.com",
+      name: "Admin User",
+      password: hashedPassword,
+      role: "admin",
+    },
+  });
 
   console.log("Seeding finished.");
 }

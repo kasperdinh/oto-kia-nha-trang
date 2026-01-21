@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ContactForm } from "../../../components/forms/ContactForm";
+import { ContactForm } from "@/components/forms/ContactForm";
 import {
   MapPinIcon,
   PhoneIcon,
@@ -28,7 +28,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info Card */}
-          <div className="bg-white rounded-xl shadow-xl p-8 lg:col-span-1 h-fit">
+          <div className="bg-white rounded-xl shadow-xl p-8 lg:col-span-1 h-full">
             <h3 className="text-xl font-bold text-kia-dark mb-6">
               Thông Tin Liên Hệ
             </h3>
@@ -82,13 +82,13 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-xl shadow-xl p-8 lg:col-span-2">
+          <div className="bg-white rounded-xl shadow-xl p-8 lg:col-span-2 h-full">
             <h3 className="text-xl font-bold text-kia-dark mb-2">
-              Gửi Tin Nhắn
+              Yêu cầu tư vấn
             </h3>
             <p className="text-gray-500 mb-8">
-              Điền thông tin vào biểu mẫu dưới đây, chúng tôi sẽ phản hồi trong
-              thời gian sớm nhất.
+              Điền thông tin vào biểu mẫu dưới đây nếu bạn cần tư vấn thêm, nhân
+              viên của chúng tôi sẽ phản hồi trong thời gian sớm nhất.
             </p>
             <ContactForm />
           </div>

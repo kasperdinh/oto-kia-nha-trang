@@ -22,10 +22,8 @@ export const buttonVariants = ({
   className?: string;
 }) => {
   const variants = {
-    primary:
-      "bg-kia-red text-white hover:bg-red-700 focus-visible:ring-kia-red",
-    secondary:
-      "bg-kia-dark text-white hover:bg-black focus-visible:ring-kia-dark",
+    primary: "bg-kia-red text-white hover:bg-kia-red-hover",
+    secondary: "bg-kia-dark text-white hover:bg-black",
     outline:
       "border border-gray-300 bg-transparent hover:bg-gray-100 text-gray-900",
     ghost: "hover:bg-gray-100 hover:text-gray-900",
@@ -40,7 +38,7 @@ export const buttonVariants = ({
   };
 
   return cn(
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-[color,background-color,border-color,transform] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 cursor-pointer hover:scale-[1.02] active:scale-[0.98]",
     variants[variant],
     sizes[size],
     className

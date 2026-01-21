@@ -2,6 +2,7 @@
 
 import { StarIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -35,6 +36,25 @@ const testimonials = [
   },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, scale: 0.9 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 50 },
+  },
+};
+
 export function Testimonials() {
   return (
     <section className="bg-white py-24 sm:py-32">
@@ -48,11 +68,18 @@ export function Testimonials() {
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {testimonials.map((testimonial) => (
-              <div
+              <motion.div
                 key={testimonial.id}
-                className="rounded-2xl bg-gray-50 p-8 shadow-sm ring-1 ring-gray-900/5 hover:shadow-md transition-shadow"
+                variants={item}
+                className="rounded-2xl bg-gray-50 p-8 shadow-sm ring-1 ring-gray-900/5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex gap-x-1 text-accent-gold">
                   {[...Array(5)].map((_, i) => (
@@ -67,10 +94,10 @@ export function Testimonials() {
                     />
                   ))}
                 </div>
-                <blockquote className="text-gray-900">
-                  <p>{`"${testimonial.quote}"`}</p>
+                <blockquote className="text-gray-900 mt-4">
+                  <p className="italic text-gray-700">{`"${testimonial.quote}"`}</p>
                 </blockquote>
-                <div className="mt-6 flex items-center gap-x-4">
+                <div className="mt-6 flex items-center gap-x-4 border-t border-gray-100 pt-4">
                   {testimonial.avatar ? (
                     <div className="relative h-10 w-10 rounded-full bg-gray-50 overflow-hidden">
                       <Image
@@ -81,7 +108,7 @@ export function Testimonials() {
                       />
                     </div>
                   ) : (
-                    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold">
+                    <div className="h-10 w-10 rounded-full bg-linear-to-br from-kia-red to-red-800 flex items-center justify-center text-white font-bold shadow-sm">
                       {testimonial.author.charAt(0)}
                     </div>
                   )}
@@ -89,14 +116,14 @@ export function Testimonials() {
                     <div className="font-semibold text-gray-900">
                       {testimonial.author}
                     </div>
-                    <div className="text-sm leading-6 text-gray-600">
+                    <div className="text-sm leading-6 text-gray-500">
                       {testimonial.role}
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

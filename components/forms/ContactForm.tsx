@@ -1,124 +1,118 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "../ui/Button";
+import { useActionState } from "react";
+import { Button } from "@/components/ui/Button";
+import { submitContact } from "@/app/actions/leads";
+import { useEffect, useRef } from "react";
+import { UserIcon, PhoneIcon } from "@heroicons/react/24/outline";
+
+const initialState = {
+  errors: {},
+};
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [state, formAction, isPending] = useActionState(
+    submitContact,
+    initialState,
+  );
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert("Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!");
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  useEffect(() => {
+    if (state.success) {
+      alert(state.message);
+      formRef.current?.reset();
+    } else if (state.message && !state.success) {
+      alert(state.message);
+    }
+  }, [state]);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-        <div>
+    <form ref={formRef} action={formAction} className="space-y-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="relative">
           <label
             htmlFor="name"
-            className="block text-sm font-semibold leading-6 text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900 mb-2"
           >
             Họ và tên
           </label>
-          <div className="mt-2.5">
+          <div className="relative rounded-md shadow-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <UserIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
             <input
               type="text"
               name="name"
               id="name"
               autoComplete="given-name"
               required
-              className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-              value={formData.name}
-              onChange={handleChange}
+              placeholder="Nguyễn Văn A"
+              className="block w-full rounded-md border border-gray-300 py-3 pl-10 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-kia-red focus:ring-0 sm:text-sm sm:leading-6 transition-all duration-200"
             />
           </div>
+          {state.errors?.name && (
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <span className="text-red-500">⚠</span> {state.errors.name[0]}
+            </p>
+          )}
         </div>
-        <div>
+
+        <div className="relative">
           <label
             htmlFor="phone"
-            className="block text-sm font-semibold leading-6 text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900 mb-2"
           >
             Số điện thoại
           </label>
-          <div className="mt-2.5">
+          <div className="relative rounded-md shadow-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <PhoneIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
             <input
               type="tel"
               name="phone"
               id="phone"
               autoComplete="tel"
               required
-              className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-              value={formData.phone}
-              onChange={handleChange}
+              placeholder="0909 090 909"
+              className="block w-full rounded-md border border-gray-300 py-3 pl-10 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-kia-red focus:ring-0 sm:text-sm sm:leading-6 transition-all duration-200"
             />
           </div>
+          {state.errors?.phone && (
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <span className="text-red-500">⚠</span> {state.errors.phone[0]}
+            </p>
+          )}
         </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold leading-6 text-gray-900"
-          >
-            Email
-          </label>
-          <div className="mt-2.5">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              autoComplete="email"
-              className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-2 relative">
           <label
             htmlFor="message"
-            className="block text-sm font-semibold leading-6 text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900 mb-2"
           >
-            Nội dung tin nhắn
+            Lời nhắn{" "}
+            <span className="text-gray-500 font-normal">(Không bắt buộc)</span>
           </label>
-          <div className="mt-2.5">
+          <div className="relative rounded-md shadow-sm">
             <textarea
               name="message"
               id="message"
               rows={4}
-              required
-              className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-              value={formData.message}
-              onChange={handleChange}
+              placeholder="Để lại lời nhắn của bạn..."
+              className="block w-full rounded-md border border-gray-300 py-3 pl-3 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-kia-red focus:ring-0 sm:text-sm sm:leading-6 transition-all duration-200 resize-none"
             />
           </div>
         </div>
       </div>
-      <div className="mt-10">
+
+      <div className="pt-2 flex justify-end">
         <Button
           type="submit"
-          disabled={isSubmitting}
-          isLoading={isSubmitting}
-          className="w-full sm:w-auto"
+          disabled={isPending}
+          isLoading={isPending}
+          className="w-full sm:h-10 sm:w-auto min-w-full flex items-center justify-center gap-2 text-base py-3"
+          size="lg"
         >
-          Gửi tin nhắn
+          {!isPending && "Gửi Yêu Cầu"}
         </Button>
       </div>
     </form>

@@ -1,9 +1,12 @@
-import { auth, signOut } from "@/lib/auth";
+import { auth, signOut } from "@/lib/auth/index";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   HomeIcon,
   ArrowLeftOnRectangleIcon,
   DocumentTextIcon,
+  ArchiveBoxIcon,
+  SwatchIcon,
 } from "@heroicons/react/24/outline";
 
 export default async function AdminLayout({
@@ -12,6 +15,10 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+
+  if (!session?.user) {
+    redirect("/login");
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -35,25 +42,29 @@ export default async function AdminLayout({
               className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-900 hover:bg-gray-50 hover:text-kia-red"
             >
               <DocumentTextIcon className="mr-3 h-5 w-5 text-gray-500 group-hover:text-kia-red" />
-              Quản lý Lead
+              Quản lý yêu cầu
+            </Link>
+            <Link
+              href="/admin/cars"
+              className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-900 hover:bg-gray-50 hover:text-kia-red"
+            >
+              <ArchiveBoxIcon className="mr-3 h-5 w-5 text-gray-500 group-hover:text-kia-red" />
+              Sản phẩm
+            </Link>
+            <Link
+              href="/admin/colors"
+              className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-900 hover:bg-gray-50 hover:text-kia-red"
+            >
+              <SwatchIcon className="mr-3 h-5 w-5 text-gray-500 group-hover:text-kia-red" />
+              Quản lý màu sắc
             </Link>
           </nav>
 
           <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center mb-4">
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-700">
-                  {session?.user?.name || "Admin"}
-                </p>
-                <p className="text-xs font-medium text-gray-500">
-                  {session?.user?.email}
-                </p>
-              </div>
-            </div>
             <form
               action={async () => {
                 "use server";
-                await signOut();
+                await signOut({ redirectTo: "/login" });
               }}
             >
               <button

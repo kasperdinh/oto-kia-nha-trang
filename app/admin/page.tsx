@@ -1,38 +1,42 @@
-import prisma from "@/lib/prisma";
 import { UsersIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
+import { getLeadStats } from "@/services/lead.service";
+import { countCars } from "@/repositories/car.repository";
+
+// Connect to real data
+const getCarStats = async () => {
+  const total = await countCars({ page: 1, limit: 1 }, false);
+  return { total };
+};
 
 export default async function AdminDashboard() {
-  const totalLeads = await prisma.lead.count();
-  const quoteLeads = await prisma.lead.count({ where: { type: "QUOTE" } });
-  const testDriveLeads = await prisma.lead.count({
-    where: { type: "TEST_DRIVE" },
-  });
-  const contactLeads = await prisma.lead.count({ where: { type: "CONTACT" } });
+  const statsData = await getLeadStats();
+  const carStats = await getCarStats();
 
   const stats = [
     {
       name: "Tổng Leads",
-      value: totalLeads,
+      value: statsData.total,
       icon: UsersIcon,
       color: "bg-blue-500",
     },
     {
       name: "Báo Giá",
-      value: quoteLeads,
+      value: statsData.quote,
       icon: ChatBubbleLeftIcon,
       color: "bg-green-500",
     },
-    {
-      name: "Lái Thử",
-      value: testDriveLeads,
-      icon: ChatBubbleLeftIcon,
-      color: "bg-yellow-500",
-    },
+
     {
       name: "Liên Hệ",
-      value: contactLeads,
+      value: statsData.contact,
       icon: ChatBubbleLeftIcon,
       color: "bg-purple-500",
+    },
+    {
+      name: "Sản phẩm",
+      value: carStats.total,
+      icon: UsersIcon, // Todo: Update icon
+      color: "bg-red-500",
     },
   ];
 

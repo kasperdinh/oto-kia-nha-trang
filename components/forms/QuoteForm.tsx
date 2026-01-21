@@ -1,8 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "../ui/Button";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useActionState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import {
+  ChevronDownIcon,
+  UserIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import { submitQuote } from "@/app/actions/leads";
+import { useEffect, useRef } from "react";
+import { PROVINCES } from "@/constants/provinces";
 
 const CAR_MODELS = [
   "KIA Morning",
@@ -16,45 +24,34 @@ const CAR_MODELS = [
   "KIA Carnival",
 ];
 
+const initialState = {
+  message: "",
+  errors: {},
+};
+
 export function QuoteForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    carModel: "",
-    installment: "no",
-    location: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [state, formAction, isPending] = useActionState(
+    submitQuote,
+    initialState,
+  );
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert(
-      "Yêu cầu báo giá của bạn đã được gửi. Chúng tôi sẽ liên hệ trong ít phút!"
-    );
-    setIsSubmitting(false);
-    setFormData({
-      name: "",
-      phone: "",
-      carModel: "",
-      installment: "no",
-      location: "",
-    });
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  useEffect(() => {
+    if (state.success) {
+      alert(
+        "Yêu cầu báo giá của bạn đã được gửi. Chúng tôi sẽ liên hệ trong ít phút!",
+      );
+      formRef.current?.reset();
+    } else if (state.message && !state.success) {
+      alert(state.message);
+    }
+  }, [state]);
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="space-y-6 bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+      ref={formRef}
+      action={formAction}
+      className="space-y-6 bg-white p-8 rounded-xl shadow-lg border-2 border-gray-100"
     >
       <h3 className="text-xl font-bold text-kia-dark mb-6">Yêu Cầu Báo Giá</h3>
 
@@ -65,16 +62,21 @@ export function QuoteForm() {
         >
           Họ và tên *
         </label>
-        <div className="mt-2">
-          <input
+        <div className="relative mt-2 rounded-md shadow-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <UserIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          </div>
+          <Input
             type="text"
             name="name"
             id="name"
             required
-            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-            value={formData.name}
-            onChange={handleChange}
+            placeholder="Nguyễn Văn A"
+            className="focus-visible:ring-0 focus-visible:border-kia-red pl-10"
           />
+          {state.errors?.name && (
+            <p className="mt-1 text-sm text-red-600">{state.errors.name[0]}</p>
+          )}
         </div>
       </div>
 
@@ -85,16 +87,21 @@ export function QuoteForm() {
         >
           Số điện thoại *
         </label>
-        <div className="mt-2">
-          <input
+        <div className="relative mt-2 rounded-md shadow-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <PhoneIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          </div>
+          <Input
             type="tel"
             name="phone"
             id="phone"
             required
-            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-            value={formData.phone}
-            onChange={handleChange}
+            placeholder="0909 090 909"
+            className="focus-visible:ring-0 focus-visible:border-kia-red pl-10"
           />
+          {state.errors?.phone && (
+            <p className="mt-1 text-sm text-red-600">{state.errors.phone[0]}</p>
+          )}
         </div>
       </div>
 
@@ -110,9 +117,8 @@ export function QuoteForm() {
             id="carModel"
             name="carModel"
             required
-            className="block w-full appearance-none rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-            value={formData.carModel}
-            onChange={handleChange}
+            defaultValue=""
+            className="block w-full appearance-none rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none focus:border-kia-red focus:ring-0 sm:text-sm sm:leading-6"
           >
             <option value="">Chọn dòng xe</option>
             {CAR_MODELS.map((model) => (
@@ -125,6 +131,11 @@ export function QuoteForm() {
             <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
           </div>
         </div>
+        {state.errors?.carModel && (
+          <p className="mt-1 text-sm text-red-600">
+            {state.errors.carModel[0]}
+          </p>
+        )}
       </div>
 
       <div>
@@ -135,15 +146,14 @@ export function QuoteForm() {
           Hình thức mua xe
         </label>
         <div className="mt-2 space-y-2">
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-2">
             <input
               id="cash"
               name="installment"
               type="radio"
               value="no"
-              checked={formData.installment === "no"}
-              onChange={handleChange}
-              className="h-4 w-4 border-gray-300 text-kia-red focus:ring-kia-red"
+              defaultChecked
+              className="h-3.5 w-3.5 text-kia-red focus:outline-none focus:ring-kia-red accent-kia-red rounded-full"
             />
             <label
               htmlFor="cash"
@@ -152,15 +162,13 @@ export function QuoteForm() {
               Trả thẳng
             </label>
           </div>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-2">
             <input
               id="installment"
               name="installment"
               type="radio"
               value="yes"
-              checked={formData.installment === "yes"}
-              onChange={handleChange}
-              className="h-4 w-4 border-gray-300 text-kia-red focus:ring-kia-red"
+              className="h-3.5 w-3.5 text-kia-red focus:outline-none focus:ring-kia-red accent-kia-red rounded-full"
             />
             <label
               htmlFor="installment"
@@ -170,6 +178,11 @@ export function QuoteForm() {
             </label>
           </div>
         </div>
+        {state.errors?.installment && (
+          <p className="mt-1 text-sm text-red-600">
+            {state.errors.installment[0]}
+          </p>
+        )}
       </div>
 
       <div>
@@ -179,22 +192,31 @@ export function QuoteForm() {
         >
           Khu vực (Tỉnh/Thành)
         </label>
-        <div className="mt-2">
-          <input
-            type="text"
-            name="location"
+        <div className="relative mt-2">
+          <select
             id="location"
-            className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kia-red sm:text-sm sm:leading-6"
-            value={formData.location}
-            onChange={handleChange}
-          />
+            name="location"
+            required
+            defaultValue=""
+            className="block w-full appearance-none rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none focus:border-kia-red focus:ring-0 sm:text-sm sm:leading-6"
+          >
+            <option value="">Chọn khu vực</option>
+            {PROVINCES.map((province) => (
+              <option key={province} value={province}>
+                {province}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+            <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
       <Button
         type="submit"
-        disabled={isSubmitting}
-        isLoading={isSubmitting}
+        disabled={isPending}
+        isLoading={isPending}
         className="w-full"
       >
         Nhận Báo Giá & Ưu Đãi

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "CarColor" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;
