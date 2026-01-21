@@ -16,7 +16,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "d1uh6rui612qs7.cloudfront.net",
+        hostname: "kiakhanhhoa.vn",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.kiakhanhhoa.vn",
+      },
+      {
+        protocol: "https",
+        hostname: "kiakhanhhoa.vn",
       },
     ],
   },
