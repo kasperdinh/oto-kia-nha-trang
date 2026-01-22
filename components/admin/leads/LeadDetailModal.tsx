@@ -39,10 +39,6 @@ export function LeadDetailModal({
               <p className="font-medium text-gray-900">{lead.phone}</p>
             </div>
             <div>
-              <p className="text-gray-500">Email</p>
-              <p className="font-medium text-gray-900">{lead.email || "---"}</p>
-            </div>
-            <div>
               <p className="text-gray-500">Ngày tạo</p>
               <p className="font-medium text-gray-900">
                 {formatDate(lead.createdAt)}

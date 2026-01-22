@@ -1,128 +1,72 @@
 import prisma from "@/lib/prisma";
-import bcrypt from "bcryptjs";
 
 // --- DATA DEFINITIONS ---
 
 const COLORS = [
   {
-    nameVI: "Trắng Ngọc Trai",
-    nameEN: "Snow White Pearl",
+    nameVI: "Trắng",
+    nameEN: "Gracial White Pearl",
     code: "GWP",
-    hexCode: "#ffffff",
+    hexCode: "#F5F5F2", // trắng ngọc
   },
-  { nameVI: "Đỏ", nameEN: "Red", code: "CR5", hexCode: "#bb162b" },
-  { nameVI: "Xanh", nameEN: "Blue", code: "B2", hexCode: "#1F4FA3" },
-  { nameVI: "Đen", nameEN: "Aurora Black", code: "ABP", hexCode: "#000000" },
-  { nameVI: "Xám", nameEN: "Steel Gray", code: "KLG", hexCode: "#808080" },
+  {
+    nameVI: "Vàng",
+    nameEN: "Star Bright Yellow",
+    code: "B4Y",
+    hexCode: "#F2C200", // vàng tươi
+  },
+  {
+    nameVI: "Đỏ",
+    nameEN: "Runaway Red",
+    code: "CR5",
+    hexCode: "#9E1B32", // đỏ đậm ánh rượu vang
+  },
+  {
+    nameVI: "Xanh",
+    nameEN: "Mineral Blue",
+    code: "M4B",
+    hexCode: "#2F5D8C", // xanh khoáng
+  },
+  {
+    nameVI: "Xám",
+    nameEN: "Steel Grey",
+    code: "KLG",
+    hexCode: "#6E7175", // xám thép
+  },
+  {
+    nameVI: "Xanh",
+    nameEN: "Cityscape Green",
+    code: "CGE",
+    hexCode: "#3E5F4F", // xanh lục đô thị
+  },
 ];
 
 const CARS = [
   {
-    name: "KIA Seltos",
-    slug: "kia-seltos",
-    category: "SUV",
-    description:
-      "<p><strong>KIA Seltos</strong> - Mẫu SUV đô thị dẫn đầu xu hướng với thiết kế mạnh mẽ, thể thao, nhiều tiện nghi cao cấp và khả năng vận hành linh hoạt.</p>",
+    name: "KIA Morning",
+    slug: "kia-morning",
+    category: "Hatchback",
+    description: "",
     variants: [
       {
-        name: "1.4L Turbo Luxury",
-        price: 604000000,
-        promotionPrice: 599000000,
+        name: "New Morning MT",
+        price: 349000000,
+        promotionPrice: 300000000,
       },
       {
-        name: "1.4L Turbo Premium",
-        price: 699000000,
-        promotionPrice: 689000000,
+        name: "New Morning AT",
+        price: 439000000,
+        promotionPrice: undefined,
+      },
+      {
+        name: "New Morning GT-Line",
+        price: 469000000,
+        promotionPrice: undefined,
       },
     ],
     // Common images for gallery
     images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-    ],
-  },
-  {
-    name: "KIA Sonet",
-    slug: "kia-sonet",
-    category: "SUV",
-    description:
-      "<p><strong>KIA Sonet</strong> - SUV Đô thị nhỏ gọn, năng động và thông minh.</p>",
-    variants: [
-      {
-        name: "Premium",
-        price: 519000000,
-        promotionPrice: undefined, // Explicitly undefined
-      },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-    ],
-  },
-  {
-    name: "KIA Carnival",
-    slug: "kia-carnival",
-    category: "MPV",
-    description:
-      "<p><strong>KIA Carnival</strong> - SUV đô thị cỡ lớn, sang trọng và đẳng cấp.</p>",
-    variants: [
-      {
-        name: "Signature",
-        price: 1189000000,
-        promotionPrice: undefined,
-      },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-    ],
-  },
-  {
-    name: "KIA K3",
-    slug: "kia-k3",
-    category: "Sedan",
-    description:
-      "<p><strong>KIA K3</strong> - Sedan hạng C chuẩn mực công nghệ.</p>",
-    variants: [
-      {
-        name: "Premium",
-        price: 549000000,
-        promotionPrice: undefined,
-      },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-    ],
-  },
-  {
-    name: "KIA Morning",
-    slug: "kia-morning",
-    category: "Hatchback",
-    description:
-      "<p><strong>KIA Morning</strong> - Mẫu xe đô thị nhỏ gọn, linh hoạt.</p>",
-    variants: [
-      {
-        name: "GT-Line",
-        price: 369000000,
-        promotionPrice: undefined,
-      },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
-    ],
-  },
-  {
-    name: "KIA Sorento",
-    slug: "kia-sorento",
-    category: "SUV",
-    description: "<p><strong>KIA Sorento</strong> - SUV 7 chỗ sang trọng.</p>",
-    variants: [
-      {
-        name: "Signature Diesel",
-        price: 999000000,
-        promotionPrice: undefined,
-      },
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1200",
+      "",
     ],
   },
 ];
@@ -133,7 +77,7 @@ async function main() {
   // 1. Seed Colors
   for (const color of COLORS) {
     await prisma.colorMaster.upsert({
-      where: { code: color.code }, // Use code as unique identifier for upsert
+      where: { code: color.code }, 
       update: {
         nameVI: color.nameVI,
         nameEN: color.nameEN,
@@ -208,27 +152,27 @@ async function main() {
   // ... Keep mostly same, just check mandatory fields
   // Leads don't depend on Car ID strongly in the original Code (just text), so we can keep it as string.
 
-  console.log("Seeding 100 random leads...");
-  // ... (Same random logic)
-  const NAMES = ["Nguyễn Văn A", "Trần Thị B", "Lê Văn C"];
-  const TYPES = ["QUOTE", "CONTACT"];
-  const STATUSES = ["PENDING", "PROCESSED", "ARCHIVED"];
+  // console.log("Seeding 100 random leads...");
+  // // ... (Same random logic)
+  // const NAMES = ["Nguyễn Văn A", "Trần Thị B", "Lê Văn C"];
+  // const TYPES = ["QUOTE", "CONTACT"];
+  // const STATUSES = ["PENDING", "PROCESSED", "ARCHIVED"];
 
-  const leadsData = Array.from({ length: 20 }).map(() => {
-    // Reduced to 20 for speed
-    return {
-      type: TYPES[Math.floor(Math.random() * TYPES.length)]!,
-      name: NAMES[Math.floor(Math.random() * NAMES.length)]!,
-      phone: "0900000000",
-      email: "demo@example.com",
-      carModel: "KIA Seltos",
-      status: STATUSES[Math.floor(Math.random() * STATUSES.length)]!,
-    };
-  });
+  // const leadsData = Array.from({ length: 20 }).map(() => {
+  //   // Reduced to 20 for speed
+  //   return {
+  //     type: TYPES[Math.floor(Math.random() * TYPES.length)]!,
+  //     name: NAMES[Math.floor(Math.random() * NAMES.length)]!,
+  //     phone: "0900000000",
+  //     email: "demo@example.com",
+  //     carModel: "KIA Seltos",
+  //     status: STATUSES[Math.floor(Math.random() * STATUSES.length)]!,
+  //   };
+  // });
 
-  for (const lead of leadsData) {
-    await prisma.lead.create({ data: lead });
-  }
+  // for (const lead of leadsData) {
+  //   await prisma.lead.create({ data: lead });
+  // }
 
   console.log("Seeding finished.");
 }

@@ -38,7 +38,7 @@ export function Footer() {
             </div>
             <p className="text-sm leading-6 text-gray-300">
               KIA Khánh Hòa chuyên giới thiệu các dòng xe KIA tại khu vực
-              Khánh Hòa. Chúng tôi cung cấp sản phẩm chính hãng, tư vấn mua xe
+              Khánh Hòa. Chúng tôi cung cấp thông tin các sản phẩm chính hãng, tư vấn mua xe
               và hỗ trợ các dịch vụ bảo hành, bảo dưỡng theo quy định của nhà
               sản xuất.
             </p>
