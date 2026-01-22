@@ -5,6 +5,7 @@ import {
   updateCarRepository,
   deleteCarRepository,
 } from "@/repositories/car.repository";
+import { toCloudFrontUrl } from "@/lib/s3";
 
 // Helper to map relational car to flat structure for lists
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +14,7 @@ function mapCarToList(car: any) {
     ...car,
     price: car.variants?.[0]?.price ?? 0,
     promotionPrice: car.variants?.[0]?.promotionPrice ?? null,
-    imageUrl: car.imageUrl ?? car.images?.[0]?.url ?? null,
+    imageUrl: toCloudFrontUrl(car.imageUrl ?? car.images?.[0]?.url),
   };
 }
 

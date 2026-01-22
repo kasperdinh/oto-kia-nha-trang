@@ -1,8 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState, useActionState } from "react";
 import { Button } from "@/components/ui/Button";
 import { ActionState } from "@/app/actions/cars";
+import ImageUpload from "@/components/admin/ui/ImageUpload";
+import RichTextEditor from "@/components/ui/RichTextEditor";
 
 type CarFormProps = {
   //
@@ -25,6 +27,10 @@ const initialState: ActionState = {
 
 export function CarForm({ action, initialData, submitLabel }: CarFormProps) {
   const [state, formAction, isPending] = useActionState(action, initialState);
+  const [description, setDescription] = useState(
+    initialData?.description || "",
+  );
+  const [imageUrl, setImageUrl] = useState(initialData?.imageUrl || "");
 
   return (
     <form
@@ -58,79 +64,61 @@ export function CarForm({ action, initialData, submitLabel }: CarFormProps) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="price"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Giá niêm yết (VNĐ)
-              </label>
-              <div className="mt-1">
-                <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  defaultValue={initialData?.price}
-                  required
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-kia-red focus:ring-kia-red sm:text-sm h-10 px-3 border"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="category"
                 className="block text-sm font-medium text-gray-700"
               >
-                Danh mục (Sedan, SUV, Hatchback...)
+                Danh mục
               </label>
               <div className="mt-1">
-                <input
-                  type="text"
-                  name="category"
+                <select
                   id="category"
-                  defaultValue={initialData?.category}
+                  name="category"
+                  defaultValue={initialData?.category || "SUV"}
                   required
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-kia-red focus:ring-kia-red sm:text-sm h-10 px-3 border"
-                />
+                >
+                  <option value="SUV">SUV</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="Hatchback">Hatchback</option>
+                </select>
               </div>
             </div>
 
-            <div className="sm:col-span-6">
-              <label
-                htmlFor="imageUrl"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Link hình ảnh
+            <div className="sm:col-span-6 border-t pt-4 border-b pb-4 border-dashed border-gray-200">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Hình ảnh đại diện
               </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="imageUrl"
-                  id="imageUrl"
-                  defaultValue={initialData?.imageUrl}
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-kia-red focus:ring-kia-red sm:text-sm h-10 px-3 border"
-                  required
-                />
+              <div className="space-y-4">
+                {imageUrl && (
+                  <div className="relative group h-40 w-64">
+                    <img
+                      src={imageUrl}
+                      alt="Preview"
+                      className="object-cover rounded border border-gray-200 w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="max-w-xs">
+                  <ImageUpload
+                    onUploadComplete={(url) => setImageUrl(url)}
+                    folder="cars/temp"
+                  />
+                </div>
+                <input type="hidden" name="imageUrl" value={imageUrl} />
               </div>
             </div>
 
             <div className="sm:col-span-6">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Mô tả
               </label>
-              <div className="mt-1">
-                <textarea
-                  id="description"
-                  name="description"
-                  rows={3}
-                  defaultValue={initialData?.description}
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-kia-red focus:ring-kia-red sm:text-sm p-3 border"
-                />
-              </div>
+              <RichTextEditor content={description} onChange={setDescription} />
+              <input type="hidden" name="description" value={description} />
             </div>
 
             <div className="sm:col-span-6">

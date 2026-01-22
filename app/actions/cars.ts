@@ -14,7 +14,7 @@ export type ActionState = {
 
 const CreateCarSchema = z.object({
   name: z.string().min(1, "Tên xe không được để trống"),
-  price: z.coerce.number().min(0, "Giá không hợp lệ"),
+  price: z.coerce.number().optional().default(0),
   category: z.string().min(1),
   // imageUrl is optional now because we might upload a file
   imageUrl: z.string().optional(),
@@ -69,9 +69,19 @@ export async function createCar(prevState: ActionState, formData: FormData) {
   }
 
   // 3. Generate Slug
-  const slug = slugify(
-    validated.data.name + "-" + Date.now().toString().slice(-4),
-  );
+  const baseSlug = slugify(validated.data.name);
+  let slug = baseSlug;
+  let counter = 1;
+
+  const { findCarBySlug } = await import("@/repositories/car.repository");
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const existing = await findCarBySlug(slug);
+    if (!existing) break;
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
 
   // 4. Handle Image Upload (Now we have slug)
   let finalImageUrl = validated.data.imageUrl;

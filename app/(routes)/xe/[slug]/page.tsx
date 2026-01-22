@@ -12,14 +12,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const car = await getCarDetail(resolvedParams.slug);
+  const carData = await getCarDetail(resolvedParams.slug);
 
-  if (!car) {
+  if (!carData) {
     return {
       title: "Không tìm thấy xe | KIA Khánh Hòa",
       description: "Mẫu xe bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
     };
   }
+
+  const car = toCarDetailDTO(carData);
 
   const title = `Giá Xe ${car.name} Nha Trang - Khánh Hòa | Thông Số & Khuyến Mãi`;
   const description = `Chi tiết xe ${car.name} tại KIA Nha Trang. Giá lăn bánh, thông số kỹ thuật, hình ảnh và khuyến mãi mới nhất. Mua xe ${car.name} trả góp lãi suất thấp.`;

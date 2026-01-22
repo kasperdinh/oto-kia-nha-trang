@@ -23,11 +23,11 @@ import { ContactWidget } from "@/components/layout/ContactWidget";
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl() as string),
   title: {
-    default: "KIA Khánh Hòa - Showroom Chính Hãng | Bảng Giá & Ưu Đãi Mới Nhất",
+    default: "KIA Khánh Hòa | Bảng Giá & Ưu Đãi Mới Nhất",
     template: "%s | KIA Khánh Hòa",
   },
   description:
-    "Showroom KIA Khánh Hòa - Chuyên cung cấp các dòng xe KIA chính hãng: Seltos, Sonet, Carnival, K3, Sportage. Cập nhật bảng giá, khuyến mãi và hỗ trợ trả góp tốt nhất tại Nha Trang, Khánh Hòa.",
+    "Showroom KIA Khánh Hòa - Chuyên cung cấp thông tin các dòng xe KIA chính hãng: Seltos, Sonet, Carnival, K3, Sportage. Cập nhật bảng giá, khuyến mãi và hỗ trợ trả góp tốt nhất tại Nha Trang, Khánh Hòa.",
   keywords: [
     "KIA Nha Trang",
     "KIA Khánh Hòa",
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "KIA Khánh Hòa - Showroom Chính Hãng | Bảng Giá & Ưu Đãi",
+    title: "KIA Khánh Hòa | Bảng Giá & Ưu Đãi",
     description:
-      "Đại lý KIA chính hãng tại Nha Trang, Khánh Hòa. Cung cấp các dòng xe KIA mới nhất với giá tốt nhất thị trường.",
+      "KIA Khánh Hòa. Cung cấp thông tin các dòng xe KIA mới nhất với giá tốt nhất thị trường.",
     url: getBaseUrl(),
     siteName: "KIA Khánh Hòa",
     images: [

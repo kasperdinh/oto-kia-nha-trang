@@ -1,33 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+
   experimental: {
     serverActions: {
       bodySizeLimit: "50mb",
     },
   },
+
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "kiakhanhhoa.vn",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.kiakhanhhoa.vn",
-      },
-      {
-        protocol: "https",
-        hostname: "kiakhanhhoa.vn",
-      },
-    ],
+    unoptimized: true,
   },
+
   async headers() {
     return [
       {
@@ -36,10 +21,6 @@ const nextConfig: NextConfig = {
           {
             key: "X-DNS-Prefetch-Control",
             value: "on",
-          },
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=63072000; includeSubDomains; preload",
           },
           {
             key: "X-Frame-Options",

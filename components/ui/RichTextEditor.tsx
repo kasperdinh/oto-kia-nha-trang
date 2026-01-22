@@ -116,7 +116,7 @@ export default function RichTextEditor({
   onChange: (html: string) => void;
 }) {
   const editor = useEditor({
-    extensions: [StarterKit, Image, Link.configure({ openOnClick: false })],
+    extensions: [StarterKit, Image],
     content: content,
     immediatelyRender: false,
     editorProps: {
