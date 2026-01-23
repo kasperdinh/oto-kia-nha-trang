@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { submitLead } from "@/services/lead.service";
+import { sendTelegramMessage } from "@/services/telegram.service";
 
 const ContactSchema = z.object({
   name: z.string().min(1, "Vui lòng nhập họ tên"),
@@ -52,6 +53,10 @@ export async function submitContact(
       message: validated.data.message || undefined,
     }); // returns Lead or throws
 
+    await sendTelegramMessage(
+      `📩 *YÊU CẦU TƯ VẤN*\n👤 Tên: ${validated.data.name}\n📞 SĐT: ${validated.data.phone}\n📝 Lời nhắn: ${validated.data.message || "Không có"}`,
+    );
+
     return {
       success: true,
       message: "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!",
@@ -99,6 +104,12 @@ export async function submitQuote(
       installment: validated.data.installment || undefined,
       location: validated.data.location || undefined,
     });
+
+    await sendTelegramMessage(
+      `🚘 *YÊU CẦU BÁO GIÁ*\n👤 Tên: ${validated.data.name}\n📞 SĐT: ${validated.data.phone}\n🚗 Dòng xe: ${validated.data.carModel}\n💰 Hình thức: ${
+        validated.data.installment === "yes" ? "Trả góp" : "Trả thẳng"
+      }\n📍 Khu vực: ${validated.data.location || "Không rõ"}`,
+    );
 
     return {
       success: true,
