@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kia Nha Trang / Kia Khanh Hoa Management System
 
-## Getting Started
+A comprehensive management system for the Kia dealership in Nha Trang/Khanh Hoa. This application handles car inventory, leads, rich content management for car models, and user administration.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Database:** [PostgreSQL](https://www.postgresql.org/)
+- **ORM:** [Prisma](https://www.prisma.io/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Authentication:** [NextAuth.js v5](https://authjs.dev/)
+- **Storage:** AWS S3 (via `@aws-sdk/client-s3`)
+- **Testing:** [Playwright](https://playwright.dev/)
+- **Rich Text Editor:** [Tiptap](https://tiptap.dev/)
+
+## ✨ Key Features
+
+### 🚗 Car Management
+
+- **Models:** Manage car models (e.g., Seltos, Carnival) with rich descriptions and SEO metadata.
+- **Variants:** Handle specific variants (e.g., 1.4 Turbo Luxury) with pricing and hierarchy.
+- **Colors:** Master color management and variant-specific color mappings.
+- **Gallery:** Upload and manage images for specific variants or general galleries.
+- **Documents:** Attach brochures and spec sheets to car models.
+
+### 👥 Lead Management
+
+- **Tracking:** Capture leads from quotes, test drive requests, and contact forms.
+- **Workflow:** Track status (Pending, Processed, Archived).
+
+### ⚙️ System
+
+- **User Roles:** Admin and User role-based access control.
+- **Master Data:** Centralized management for car colors.
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- PostgreSQL
+- An AWS Account (for S3 storage)
+
+### Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone <repository_url>
+    cd oto-kia-nha-trang
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Environment Setup:**
+    Copy the example environment file and configure your variables.
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Update `.env` with your database URL, auth secret, and AWS credentials.
+
+4.  **Database Setup:**
+    Generate the Prisma client and push the schema to your database.
+
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
+
+5.  **Seed Data:**
+    Populate the database with initial data.
+    ```bash
+    npm run prisma:seed
+    ```
+
+### Running the Application
+
+**Development Mode:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Production Build:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 🧪 Running Tests
 
-To learn more about Next.js, take a look at the following resources:
+This project uses Playwright for end-to-end testing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Run all tests
+npx playwright test
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Run UI mode
+npx playwright test --ui
+```
 
-## Deploy on Vercel
+## 📜 Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev`: Start development server.
+- `npm run build`: Build for production.
+- `npm run start`: Start production server.
+- `npm run lint`: Run ESLint.
+- `npm run prisma:seed`: Seed the database.
+- `npm run prisma:clear`: Clear the database (use with caution).
