@@ -3,6 +3,9 @@ name: Vercel Deployment
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
   workflow_dispatch:
 
 env:
