@@ -1,11 +1,12 @@
 # 📍 Kia Nha Trang – Management System
 
-[![Status](https://img.shields.io/badge/Status-Completed-4CAF50?style=flat-square)](https://github.com/kasperdinh/oto-kia-nha-trang)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js)](https://nextjs.org)
-[![Tailwind](https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org)
-[![License](https://img.shields.io/badge/License-MIT-4CAF50?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Done-4CAF50?style=flat-square&labelColor=555555)](https://github.com/kasperdinh/oto-kia-nha-trang)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&labelColor=3178C6&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&labelColor=000000&logo=next.js&logoColor=white)](https://nextjs.org)
+[![Tailwind](https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&labelColor=38B2AC&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&labelColor=336791&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![License](https://img.shields.io/badge/License-MIT-4CAF50?style=flat-square&labelColor=555555)](LICENSE)
+
 
 > **A comprehensive digital solution for automotive dealership management.**
 >
